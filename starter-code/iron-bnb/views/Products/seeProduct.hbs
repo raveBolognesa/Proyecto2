@@ -1,0 +1,24 @@
+  <p>productos</p>
+
+{{#each Product}}
+  <h3>{{name}}</h3> 
+
+      <img src="{{this.imgPath}}" alt="">
+  <p><a href="/products/{{_id}}">Show details</a></p>
+  <p><a href="/products/{{_id}}/edit">Edit movie</a></p>
+  <form action="/products/{{_id}}/delete" method="post">
+    <button>Delete movie</button>
+  </form> 
+{{/each}}
+
+    <a href="/products/new">Nuevo Producto</a>
+
+
+  <h3>My First Mapa</h3>
+  <div id="map"></div>
+
+
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0HUgfditDr8NvZjsnOmJYIwcP6AWVTqw"></script>
+  <script src="/javascripts/script.js"></script>

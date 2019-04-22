@@ -1,0 +1,27 @@
+
+     <h2>Add a new product!</h2>
+<form action="/products/new" method="post" enctype="multipart/form-data">
+  <label for="name">name: </label>
+  <input type="text" name="name" id="name">
+  <label for="description">description: </label>
+  <input type="text" name="description" id="description">
+
+  <label>Poster</label>
+  <input type="file" name="photo">
+  <input type="text" name="Pos" id="Pos">
+  <input type="text" name="lat" id="lat">
+  <input type="text" name="lng" id="lng">
+  <input type="hidden" name="author" id="author" value="jamon">
+  <button type="submit">Add movie</button>
+</form>
+
+
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+
+
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script src="/javascripts/findMap.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0HUgfditDr8NvZjsnOmJYIwcP6AWVTqw&libraries=places&callback=initAutocomplete"></script>
+ 
