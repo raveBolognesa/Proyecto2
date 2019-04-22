@@ -59,5 +59,13 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+// router.get("/oauth/google", (req, res) => {
+//   // req.logout();
+//   // res.redirect("/");
+// });
+
+router.post('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+
 
 module.exports = router;

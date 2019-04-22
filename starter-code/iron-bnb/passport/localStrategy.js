@@ -2,6 +2,8 @@ const passport      = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User          = require('../models/User');
 const bcrypt        = require('bcrypt');
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 
 passport.use(new LocalStrategy({
     usernameField: 'username',
@@ -25,3 +27,5 @@ passport.use(new LocalStrategy({
     .catch(err => done(err));
   }
 ));
+
+
