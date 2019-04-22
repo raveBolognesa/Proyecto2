@@ -9,10 +9,15 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
+
 const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
-    
+const passport = require('passport');
+
+
+
+
 
 mongoose
   .connect('mongodb://localhost/iron-bnb', {useNewUrlParser: true})
@@ -80,6 +85,9 @@ app.use('/', index);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
+
+
+
       
 
 module.exports = app;

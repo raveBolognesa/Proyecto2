@@ -3,6 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
 
+
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
@@ -55,17 +56,32 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+
+// GET /auth/google
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  The first step in Google authentication will involve
+//   redirecting the user to google.com.  After authorization, Google
+//   will redirect the user back to this application at /auth/google/callback
+router.get('/facebook',
+  passport.authenticate('facebook', 
+  // { scope: ['https://www.googleapis.com/auth/plus.login'] }
+  )
+  )
+
+// GET /auth/google/callback
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  If authentication fails, the user will be redirected back to the
+//   login page.  Otherwise, the primary route function function will be called,
+//   which, in this example, will redirect the user to the home page.
+router.get('/facebook/callback', 
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
-// router.get("/oauth/google", (req, res) => {
-//   // req.logout();
-//   // res.redirect("/");
-// });
-
-router.post('/oauth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-
 
 module.exports = router;
