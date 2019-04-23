@@ -1,8 +1,12 @@
   
   <div class="container">
   <div class="row">
-    <div class="col-4">
+    <div class="col-4" >
   <h2>productos</h2>
+  <div style="
+            overflow:scroll;
+            height:500px;
+            width:100%;">
 {{#each Product}}
   <div class="card">
   <div class="card-body">
@@ -17,7 +21,7 @@
   <img class="card-img-bottom" src="{{this.imgPath}}" alt="Card image cap">
 </div>
 {{/each}}
-
+</div>
     <a class="p-3 m-3 nav-link active" href="/products/new">Nuevo Producto</a>
 
 </div>
