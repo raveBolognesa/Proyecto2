@@ -3,6 +3,17 @@ const passport      = require('passport');
 const User          = require('../models/User');
 const FacebookStrategy = require('passport-facebook').Strategy;
 
+
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+   passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_ID,
   clientSecret: process.env.FACEBOOK_SECRET,
@@ -19,7 +30,10 @@ function(accessToken, refreshToken, profile, done) {
         const newUser = new User({
           username: profile.displayName,
           facebookID: profile.id,
-          email: profile.email
+
+          email: profile.email,
+          // photo:  profile.photos[0].value
+
         })
         console.log(profile)
         newUser.save()

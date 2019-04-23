@@ -62,6 +62,7 @@ router.post("/signup", (req, res, next) => {
 //   request.  The first step in Google authentication will involve
 //   redirecting the user to google.com.  After authorization, Google
 //   will redirect the user back to this application at /auth/google/callback
+
 router.get('/facebook',
   passport.authenticate('facebook', 
   // { scope: ['https://www.googleapis.com/auth/plus.login'] }
@@ -73,6 +74,7 @@ router.get('/facebook',
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
+
 router.get('/facebook/callback', 
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {

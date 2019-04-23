@@ -87,7 +87,9 @@ const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
 
-const products = require('./routes/Products');
+
+const products = require('./routes/products');
+
 app.use('/products', products);
       
 
