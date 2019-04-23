@@ -73,21 +73,6 @@ router.get('/mapa', (req, res, next) => {
   
   // editado
   router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => { 
-
-    console.log(req.body)
-    // Product.findOne({_id: req.params.id})
-    //   .then( captura => {
-    //     Product.findByIdAndUpdate(req.params)
-    //     .then(celebrity => {
-    //       res.redirect('/products');
-    //     })
-    //     .catch(err => {
-    //       res.render('./error', err)
-    //     })
-        
-    //     console.log(req.body)
-    //     console.log(captura)
-
     const { name, description,lat , lng } = req.body;
     const imgPath = req.file.url;
     const imgName = req.file.originalname;
