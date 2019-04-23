@@ -21,7 +21,7 @@ function startMap() {
     center: Madrid
   });
 
-  axios.get("http://localhost:3000/products/mapa").then(responses => {
+  axios.get(".../products/mapa").then(responses => {
     console.log(responses.data);
     let jam = responses.data.Product;
     let places = [];
