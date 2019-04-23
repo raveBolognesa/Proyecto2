@@ -6,7 +6,7 @@ const uploadCloud = require('../config/cloudinary.js');
 
 // document.getElementById("localizacion").value
 router.get('/', (req, res, next) => {
-  Product.find( {}).sort({ lat : -1, lng: 1 })
+  Product.find( {})
     .then(Product => {
       res.render('Products/seeProduct', {Product: Product});
     })

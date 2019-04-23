@@ -31,7 +31,6 @@ function startMap() {
 
 
 
-console.log(navigator.geolocation.getCurrentPosition())
 
 
   axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
