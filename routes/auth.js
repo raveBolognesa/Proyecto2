@@ -86,4 +86,19 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+
+
+// OAuth callback url
+router.get('/slack/callback', 
+  passport.authenticate('slack', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.redirect('/')
+  }
+);
+
+// path to start the OAuth flow
+router.get('/slack', passport.authenticate('slack'), (req, res, next) => {
+  next()
+});
+
 module.exports = router;
