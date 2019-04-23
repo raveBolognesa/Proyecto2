@@ -38,7 +38,7 @@ function startMap() {
     places
       .forEach(place => {
         var infowindow = new google.maps.InfoWindow({
-          content: "contentString"
+          content: `<p>${place.name}</p>`
         });
         console.log(place.Pos)
         var marker = new google.maps.Marker({
