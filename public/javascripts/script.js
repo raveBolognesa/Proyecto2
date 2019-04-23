@@ -24,9 +24,15 @@ function startMap() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        document.getElementById("localizacion").value = initialLocation
         map.setCenter(initialLocation);
     });
 }
+
+
+
+console.log(navigator.geolocation.getCurrentPosition())
+
 
   axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
     console.log(responses.data);

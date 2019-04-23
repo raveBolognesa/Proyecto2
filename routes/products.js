@@ -4,9 +4,9 @@ const router = express.Router();
 const Product = require("../models/modelProducts");
 const uploadCloud = require('../config/cloudinary.js');
 
-
+// document.getElementById("localizacion").value
 router.get('/', (req, res, next) => {
-  Product.find({})
+  Product.find({}).sort( { lat: -1 } )
     .then(Product => {
       res.render('Products/seeProduct', {Product: Product});
     })
