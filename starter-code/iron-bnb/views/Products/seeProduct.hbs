@@ -1,23 +1,38 @@
-  <p>productos</p>
-
+  
+  <div class="container">
+  <div class="row">
+    <div class="col-4" >
+  <h2>productos</h2>
+  <div style="
+            overflow:scroll;
+            height:500px;
+            width:100%;">
 {{#each Product}}
-  <h3>{{name}}</h3> 
+  <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{name}}</h5>
+    <p class="card-text"><a href="/products/{{_id}}">Show details</a><a href="/products/{{_id}}/edit">Edit movie</a><br>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 
-      <img src="{{this.imgPath}}" alt="">
-  <p><a href="/products/{{_id}}">Show details</a></p>
-  <p><a href="/products/{{_id}}/edit">Edit movie</a></p>
   <form action="/products/{{_id}}/delete" method="post">
     <button>Delete movie</button>
   </form> 
+  </div>
+  <img class="card-img-bottom" src="{{this.imgPath}}" alt="Card image cap">
+</div>
 {{/each}}
+</div>
+    <a class="p-3 m-3 nav-link active" href="/products/new">Nuevo Producto</a>
 
-    <a href="/products/new">Nuevo Producto</a>
-
-
+</div>
+<div class="col-8">
   <h3>My First Mapa</h3>
   <div id="map"></div>
 
 
+</div>
+</div>
+</div>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0HUgfditDr8NvZjsnOmJYIwcP6AWVTqw"></script>
