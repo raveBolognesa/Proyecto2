@@ -12,6 +12,7 @@ passport.use(new SlackStrategy({
         })
         .then(user => {
             if (user) {
+              console.log(user)
                 User.findByIdAndUpdate(user._id,{
                     username:profile.user.name},{new:true}).then(user => {
                         return done(null, user);
