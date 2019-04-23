@@ -24,10 +24,16 @@ function startMap() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        document.getElementById("localizacion").value = initialLocation
         map.setCenter(initialLocation);
     });
 }
-  
+
+
+
+console.log(navigator.geolocation.getCurrentPosition())
+
+
   axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
     console.log(responses.data);
     let jam = responses.data.Product;
@@ -37,8 +43,11 @@ function startMap() {
 
     places
       .forEach(place => {
+        var infowindow = new google.maps.InfoWindow({
+          content: `<p>${place.name}</p>`
+        });
         console.log(place.Pos)
-        new google.maps.Marker({
+        var marker = new google.maps.Marker({
           position: {
             lat: place.lat,
             lng: place.lng
@@ -46,6 +55,13 @@ function startMap() {
           map: map,
           title: place.name
         });
+
+
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+
+  
 
         console.log(place);
       });
