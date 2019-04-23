@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{title}}</title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
 
-  <nav>
-    <a href="/">Home</a>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/signup">Signup</a>
-    <a href="/auth/logout">Logout</a>
-    <a href="/products">Productos</a>
+  <nav class="nav justify-content nav-pills nav-fill p-3 align-items-center">
+    <a class="p-3 m-3 nav-link active" href="/">Home</a>
+    <a class="p-3 m-3 nav-link active" href="/auth/login">Login</a>
+    <a class="p-3 m-3 nav-link active" href="/auth/signup">Signup</a>
+    <a class="p-3 m-3 nav-link active" href="/auth/logout">Logout</a>
+    <a class="p-3 m-3 nav-link active" href="/products">Productos</a>
   </nav>
 
   {{{body}}}
