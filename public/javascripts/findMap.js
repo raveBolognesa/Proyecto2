@@ -11,9 +11,16 @@
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: -33.8688, lng: 151.2195 },
-    zoom: 13,
+    zoom: 18,
     mapTypeId: "roadmap"
   });
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        map.setCenter(initialLocation);
+    });
+}
 
   var findPos = document.getElementById("Pos");
   var findLat = document.getElementById("lat");

@@ -17,10 +17,17 @@ function startMap() {
     lng: -3.689471916
   };
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 1,
+    zoom: 15,
     center: Madrid
   });
 
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        map.setCenter(initialLocation);
+    });
+}
+  
   axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
     console.log(responses.data);
     let jam = responses.data.Product;
