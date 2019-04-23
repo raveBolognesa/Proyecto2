@@ -33,5 +33,23 @@
   },
   "devDependencies": {
     "nodemon": "^1.12.1"
-  }
+
+  },
+  "description": "This is the start",
+  "main": "app.js",
+  "bin": {
+    "iron-bnb": "seeds.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raveBolognesa/Proyecto2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raveBolognesa/Proyecto2/issues"
+  },
+  "homepage": "https://github.com/raveBolognesa/Proyecto2#readme"
+
 }
