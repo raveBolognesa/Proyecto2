@@ -31,9 +31,6 @@ function startMap() {
 
 
 
-console.log(navigator.geolocation.getCurrentPosition())
-
-
   axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
     console.log(responses.data);
     let jam = responses.data.Product;
@@ -62,7 +59,6 @@ console.log(navigator.geolocation.getCurrentPosition())
   });
 
   
-
         console.log(place);
       });
 

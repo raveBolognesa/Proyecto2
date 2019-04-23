@@ -4,18 +4,10 @@ const router = express.Router();
 const Product = require("../models/modelProducts");
 const uploadCloud = require('../config/cloudinary.js');
 
+// dsaa
 // document.getElementById("localizacion").value
 router.get('/', (req, res, next) => {
-  Product.find( {
-    location:
-      { $near :
-         {
-           $geometry: { type: "Point",  coordinates: [ -73.9667, 40.78 ] },
-           $minDistance: 1000,
-           $maxDistance: 5000
-         }
-      }
-  })
+  Product.find( {})
     .then(Product => {
       res.render('Products/seeProduct', {Product: Product});
     })
