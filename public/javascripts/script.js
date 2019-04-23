@@ -62,7 +62,6 @@ console.log(navigator.geolocation.getCurrentPosition())
   });
 
   
-
         console.log(place);
       });
 

@@ -6,16 +6,7 @@ const uploadCloud = require('../config/cloudinary.js');
 
 // document.getElementById("localizacion").value
 router.get('/', (req, res, next) => {
-  Product.find( {
-    location:
-      { $near :
-         {
-           $geometry: { type: "Point",  coordinates: [ -73.9667, 40.78 ] },
-           $minDistance: 1000,
-           $maxDistance: 5000
-         }
-      }
-  })
+  Product.find( {}).sort({ lat : -1, lng: 1 })
     .then(Product => {
       res.render('Products/seeProduct', {Product: Product});
     })
