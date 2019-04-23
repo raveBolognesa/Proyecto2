@@ -20,7 +20,7 @@ const passport = require('passport');
 
 
 mongoose
-  .connect('mongodb://localhost/iron-bnb', {useNewUrlParser: true})
+  .connect(process.env.MONGOREMOTE, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
