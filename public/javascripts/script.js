@@ -84,11 +84,11 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
     
     
     google.maps.event.addListener(map, 'idle', function() {
+      var filtradoVegano = [...places];
       bound = map.getBounds()
       document.getElementById("onView").innerHTML = ""
       var veganos = [...places];
       check1.addEventListener("click", function filtro(){ 
-        var filtradoVegano = [...places];
         if(check1.checked){
           filtradoVegano = []
           veganos.forEach((vegan)=>{
@@ -99,6 +99,9 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
             }
             // return vegan.vegan === true
           })
+          
+        }else{
+          filtradoVegano = [...places];
 
         }
 
