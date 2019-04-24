@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
     })
 });
 
-router.get('/:param', (req, res, next) => {
+router.get('/search/:param', (req, res, next) => {
   let lat = req.params.param
   Product.find( {}).sort({lng:lat})
     .then(Product => {
