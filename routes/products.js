@@ -7,7 +7,18 @@ const uploadCloud = require('../config/cloudinary.js');
 // dsaa
 // document.getElementById("localizacion").value
 router.get('/', (req, res, next) => {
-  Product.find( {})
+  Product.find( {}).sort({ lat: 1 })
+    .then(Product => {
+      res.render('Products/seeProduct', {Product: Product});
+    })
+    .catch(err => {
+      res.render('error', err)
+    })
+});
+
+router.get('/:param', (req, res, next) => {
+  let lat = req.params.param
+  Product.find( {}).sort({lng:lat})
     .then(Product => {
       res.render('Products/seeProduct', {Product: Product});
     })
@@ -37,10 +48,10 @@ router.get('/mapa', (req, res, next) => {
   router.post('/new', uploadCloud.single('photo'), (req, res, next) => {
 
 
-  const { name, description,lat , lng } = req.body;
+  const { name, description,lat , lng, Pos } = req.body;
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
-  const main = new Product({name, description, imgPath, imgName,lat , lng})
+  const main = new Product({name, description, imgPath, imgName,lat , lng, Pos})
   main.save()
   .then(Product => {
     res.redirect('/products');

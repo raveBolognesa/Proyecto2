@@ -29,11 +29,11 @@
     "passport-google-oauth": "^2.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "swag": "^0.7.0"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"
-
   },
   "description": "This is the start",
   "main": "app.js",
@@ -51,5 +51,4 @@
     "url": "https://github.com/raveBolognesa/Proyecto2/issues"
   },
   "homepage": "https://github.com/raveBolognesa/Proyecto2#readme"
-
 }

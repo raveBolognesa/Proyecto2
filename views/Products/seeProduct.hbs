@@ -9,11 +9,11 @@
             height:500px;
             width:100%;">
 {{#each Product}}
-  <div class="card">
+  <div class="card mt-3">
   <div class="card-body">
     <h5 class="card-title">{{name}}</h5>
-    <p class="card-text"><a href="/products/{{_id}}">Show details</a><a href="/products/{{_id}}/edit">Edit movie</a><br>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <p class="card-text"><a href="/products/{{_id}}">Show details</a><a href="/products/{{_id}}/edit">Edit movie</a><br>{{description}}</p>
+    <p class="card-text"><small class="text-muted">{{updated_at}}</small></p>
 
   <form action="/products/{{_id}}/delete" method="post">
     <button>Delete movie</button>
