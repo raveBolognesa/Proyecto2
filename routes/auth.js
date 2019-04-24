@@ -99,7 +99,7 @@ router.post('/miperfil/:id/edit', ensureLoggedIn, uploadCloud.single('photo'), (
 
       User.findOneAndUpdate({_id: req.params.id}, {username, email, password, phone, photo, rating})
         .then(celebrity => {
-          res.redirect('/profile');
+          res.render('auth/profile');
         })
         .catch(err => {
           res.render('./error', err)
