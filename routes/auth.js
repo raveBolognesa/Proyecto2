@@ -91,15 +91,15 @@ router.get('/miperfil/:id/edit', ensureLoggedIn,(req, res, next) => {
 });
 
 // editado
-router.post('/miperfil/:id/edit', ensureLoggedIn, uploadCloud.single('photo'), (req, res, next) => { 
+router.post('/miperfil/:id/edit', uploadCloud.single('photo'), (req, res, next) => { 
   const { username, email, password, phone, photo, rating} = req.body;
-  const imgPath = req.file.url;
-  const imgName = req.file.originalname;
+  // const imgPath = req.file.url;
+  // const imgName = req.file.originalname;
  
 
       User.findOneAndUpdate({_id: req.params.id}, {username, email, password, phone, photo, rating})
         .then(celebrity => {
-          res.render('auth/profile');
+          res.redirect('/auth/miperfil');
         })
         .catch(err => {
           res.render('./error', err)
