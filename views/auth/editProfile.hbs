@@ -1,6 +1,6 @@
-<h2>Signup</h2>
+<h2>Edita tu perfil</h2>
 
-<form action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
+<form action="/auth/{{_id}}/editProfile" method="POST" id="form-container">
   <label for="username">Username</label>
   <input id="username" type="text" name="username" placeholder="JonSnow">
 
@@ -9,7 +9,11 @@
   <label for="password">Password</label>
   <input id="password" type="password" name="password" placeholder="Your password">
   <br>
-    <label for="email">Introduce tu email</label>
+ 
+
+  <br><br>
+
+  <label for="email">Introduce tu email</label>
   <input id="email" type="text" name="email" placeholder="email@email.com">
 
   <br><br>
@@ -18,8 +22,9 @@
   <input id="phone" type="phone" name="phone" placeholder="Tu número de teléfono">
   
   <br><br>
-  <input type="file" name="photo">
-  
+
+  <label for="photo">Sube to imagen de perfil</label>
+  <button type="submit">Subir</button>
   <br>
   {{#if message }}
     <div class="error-message">{{ message }}</div>
@@ -27,10 +32,7 @@
 
   <br><br>
 
-  <button>Create account</button>
+  <button>Actualizar información de perfil</button>
 
-  <p class="account-message">
-    Do you already have an account?
-    <a href="/auth/login">Login</a>
-  </p>
+  
 </form>
