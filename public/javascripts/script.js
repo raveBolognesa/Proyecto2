@@ -83,8 +83,8 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
     });
     
     
+    var filtradoVegano = [...places];
     google.maps.event.addListener(map, 'idle', function() {
-      var filtradoVegano = [...places];
       bound = map.getBounds()
       document.getElementById("onView").innerHTML = ""
       var veganos = [...places];
