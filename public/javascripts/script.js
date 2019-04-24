@@ -33,7 +33,7 @@ return texto
 
 var check1 = document.getElementById("filtro1")
 
-check1.addEventListener("click", function name(){ console.log("hola")})
+check1.addEventListener("click", function name(){ console.log(check1, check1.checked , " cheker")})
 
 
 
@@ -82,28 +82,35 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
       title: place.name
     });
     
+    
     google.maps.event.addListener(map, 'idle', function() {
       bound = map.getBounds()
       document.getElementById("onView").innerHTML = ""
       var veganos = [...places];
       check1.addEventListener("click", function filtro(){ 
-       veganos = veganos.map((vegan)=>{
-          // console.log(veganos)
-          // console.log(vegan)
-          if(vegan.vegan){
-            return vegan
-          }
-          // return vegan.vegan === true
-        })
-        console.log(veganos)
-        veganos.forEach(place=>{
+        var filtradoVegano = [...places];
+        if(check1.checked){
+          filtradoVegano = []
+          veganos.forEach((vegan)=>{
+            // console.log(veganos)
+            // console.log(vegan)
+            if(vegan.vegan){
+              filtradoVegano.push(vegan) 
+            }
+            // return vegan.vegan === true
+          })
+
+        }
+
+        console.log(filtradoVegano)
+        filtradoVegano.forEach(place=>{
           if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
             document.getElementById("onView").innerHTML += carta(place)
           }
         })
         })
-        console.log(veganos)
-      veganos.forEach(place=>{
+        console.log(filtradoVegano)
+        filtradoVegano.forEach(place=>{
         if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
           document.getElementById("onView").innerHTML += carta(place)
         }
