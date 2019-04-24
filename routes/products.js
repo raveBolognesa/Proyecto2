@@ -3,6 +3,8 @@ const passport = require('passport');
 const router = express.Router();
 const Product = require("../models/modelProducts");
 const uploadCloud = require('../config/cloudinary.js');
+const ensureLoggedIn = require("../middlewares/ensureLoggedIn.js");
+const isCreator = require("../middlewares/isCreator.js");
 
 // dsaa
 // document.getElementById("localizacion").value
@@ -38,7 +40,7 @@ router.get('/mapa', (req, res, next) => {
 });
   
   
-  router.get('/new', (req, res, next) => {
+  router.get('/new', ensureLoggedIn, (req, res, next) => {
     res.render('Products/crearProduct');
   })
 
@@ -51,7 +53,8 @@ router.get('/mapa', (req, res, next) => {
   const { name, description,lat , lng, Pos } = req.body;
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
-  const main = new Product({name, description, imgPath, imgName,lat , lng, Pos})
+  const author = req.user.id;
+  const main = new Product({name, author, description, imgPath, imgName,lat , lng, Pos})
   main.save()
   .then(Product => {
     res.redirect('/products');
@@ -72,7 +75,7 @@ router.get('/mapa', (req, res, next) => {
 
   // Editamos
   
-  router.get('/:id/edit', (req, res, next) => { 
+  router.get('/:id/edit', [ensureLoggedIn, isCreator],(req, res, next) => { 
     Product.findOne({_id: req.params.id})
       .then(celebrity => {
         
@@ -84,7 +87,7 @@ router.get('/mapa', (req, res, next) => {
   });
   
   // editado
-  router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => { 
+  router.post('/:id/edit', [ensureLoggedIn, isCreator], uploadCloud.single('photo'), (req, res, next) => { 
     const { name, description,lat , lng } = req.body;
     const imgPath = req.file.url;
     const imgName = req.file.originalname;
@@ -99,7 +102,7 @@ router.get('/mapa', (req, res, next) => {
   })
   
   
-  router.post('/:id/delete', (req, res, next) => {
+  router.post('/:id/delete', [ensureLoggedIn, isCreator],(req, res, next) => {
     Product.findByIdAndDelete({_id: req.params.id})
       .then(record => {
         res.redirect('/Products');

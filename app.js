@@ -14,11 +14,8 @@ const flash      = require("connect-flash");
 const passport = require('passport');
 
 
-
-
-
 mongoose
-  .connect(process.env.MONGOREMOTE, {useNewUrlParser: true})
+  .connect(process.env.MONGO, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
