@@ -1,6 +1,6 @@
 <h2>Edita tu perfil</h2>
 
-<form action="/miperfil/{{user._id}}/edit" method="POST" id="form-container">
+<form action="/miperfil/{{user._id}}/edit" method="POST" id="form-container" enctype="multipart/form-data">
   <label for="username">Username</label>
   <input id="username" type="text" name="username" placeholder="{{user.username}}">
 
@@ -24,7 +24,9 @@
   <br><br>
 
   <label for="photo">Sube to imagen de perfil</label>
-  <button type="submit">Subir</button>
+
+  <input type="file" name="photo">
+  <button type="submit">send </button>
   <br>
   {{#if message }}
     <div class="error-message">{{ message }}</div>
@@ -32,7 +34,6 @@
 
   <br><br>
 
-  <button>Actualizar información de perfil</button>
 
   <p>{{user}}</p>
 
