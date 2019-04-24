@@ -89,7 +89,7 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
       console.log("change", counter)
       document.getElementById("onView").innerHTML = ""
       places.forEach(place=>{
-        if(place.lat > bound.ia.j && place.lat < bound.ia.l && place.lng > bound.na.j && place.lng < bound.na.l ){
+        if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
           document.getElementById("onView").innerHTML += carta(place)
         }
       })
