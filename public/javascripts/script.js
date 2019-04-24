@@ -73,7 +73,6 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
     var infowindow = new google.maps.InfoWindow({
       content: carta(place)
     });
-    console.log(place.Pos)
     var marker = new google.maps.Marker({
       position: {
         lat: place.lat,
@@ -88,12 +87,18 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
       document.getElementById("onView").innerHTML = ""
       var veganos = [...places];
       check1.addEventListener("click", function filtro(){ 
-       return veganos = [...places].filter((vegan)=>{
+        veganos = [...places].filter((vegan)=>{
           console.log(veganos)
           console.log(vegan)
           return vegan.vegan === true
         })
+        veganos.forEach(place=>{
+          if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
+            document.getElementById("onView").innerHTML += carta(place)
+          }
         })
+        })
+        console.log(veganos)
       veganos.forEach(place=>{
         if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
           document.getElementById("onView").innerHTML += carta(place)
