@@ -42,6 +42,7 @@ router.get('/mapa', (req, res, next) => {
   
   
   router.get('/new', ensureLoggedIn, (req, res, next) => {
+    console.log(req.user)
     res.render('Products/crearProduct');
   })
 

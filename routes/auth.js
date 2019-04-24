@@ -64,7 +64,7 @@ router.post("/signup", uploadCloud.single('photo'), (req, res, next) => {
 
     newUser.save()
     .then(() => {
-      res.redirect("/");
+      res.redirect("/auth/login");
     })
     .catch(err => {
       res.render("auth/signup", { message: "Something went wrong" });
@@ -72,13 +72,18 @@ router.post("/signup", uploadCloud.single('photo'), (req, res, next) => {
   });
 });
 
+router.get('/miperfil', ensureLoggedIn ,(req,res, next)=>{
+  user =req.user
+  res.render("auth/profile", {user: user})
 
+
+})
 
 router.get('/auth/:id/edit', [ensureLoggedIn, isCreator],(req, res, next) => { 
   User.findOne({_id: req.params.id})
     .then(user => {
       
-      res.render('auth/editProfile', user);
+      res.render('auth/editProfile', {user: user});
     })
     .catch(err => {
       res.render('./error', err)
