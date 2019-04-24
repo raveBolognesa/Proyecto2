@@ -10,6 +10,28 @@ document.addEventListener(
   false
 );
 
+function create(params) {
+  return `<p>hola</p><p>bounds x ${params.ia.j} ${params.ia.l}</p><p>paramss y: ${params.na.j} ${params.na.l}</p>`
+}
+
+
+function carta(params) {
+  var texto = `<div class="card mt-3">
+  <div class="card-body">
+    <h5 class="card-title">cambiado${params.name}</h5>
+    <p class="card-text"><a href="/products/${params._id}">Show details</a><a href="/products/${params._id}/edit">Edit movie</a><br>${params.description}</p>
+    <p class="card-text"><small class="text-muted">${params.updated_at}</small></p>
+
+  <form action="/products/${params._id}/delete" method="post">
+    <button>Delete movie</button>
+  </form> 
+  </div>
+  <img class="card-img-bottom" src="${params.imgPath}" alt="Card image cap">
+</div>`
+return texto
+}
+
+
 
 function startMap() {
   const Madrid = {
@@ -39,37 +61,40 @@ function startMap() {
   var bound = map.getBounds()
 var counter = 0
 
-google.maps.event.addListener(map, 'idle', function() {
-  bound = map.getBounds()
-  console.log("change")
-  document.getElementById("onView").innerHTML = `<p>hola${counter}</p><p>bounds x ${bound.ia.j} ${bound.ia.l}</p><p>bounds y: ${bound.na.j} ${bound.na.l}</p>`
-  counter++
-});
 
 
 
-  axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
-    console.log(responses.data);
-    let jam = responses.data.Product;
-    let places = [];
-    jam
-      .forEach(pig => places.push(pig))
-
-    places
-      .forEach(place => {
-        var infowindow = new google.maps.InfoWindow({
-          content: `<p>${place.name}</p>`
-        });
-        console.log(place.Pos)
-        var marker = new google.maps.Marker({
-          position: {
-            lat: place.lat,
-            lng: place.lng
-          },
-          map: map,
-          title: place.name
-        });
-
+axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
+  console.log(responses.data);
+  let jam = responses.data.Product;
+  let places = [];
+  jam
+  .forEach(pig => places.push(pig))
+  
+  places
+  .forEach(place => {
+    var infowindow = new google.maps.InfoWindow({
+      content: `<p>${place.name}</p>`
+    });
+    console.log(place.Pos)
+    var marker = new google.maps.Marker({
+      position: {
+        lat: place.lat,
+        lng: place.lng
+      },
+      map: map,
+      title: place.name
+    });
+    
+    google.maps.event.addListener(map, 'idle', function() {
+      bound = map.getBounds()
+      console.log("change", counter)
+      document.getElementById("onView").innerHTML = ""
+      places.forEach(place=>{
+        document.getElementById("onView").innerHTML += carta(place)
+      })
+      counter++
+    });
 
 
   marker.addListener('click', function() {
