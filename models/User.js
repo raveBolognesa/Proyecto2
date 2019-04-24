@@ -5,9 +5,11 @@ const userSchema = new Schema({
   username: String,
   email: String,
   password: String,
-
-  facebookID: String,
-  photo: String
+  phone: String,
+  photo: String,
+  rating: Number,
+  imgPath: String,
+  imgName: String
 
 }, {
   timestamps: {

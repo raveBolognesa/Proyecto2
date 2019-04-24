@@ -3,16 +3,39 @@
 <form action="/products/new" method="post" enctype="multipart/form-data">
   <label for="name">name: </label>
   <input type="text" name="name" id="name">
+  <br>
   <label for="description">description: </label>
-  <input type="text" name="description" id="description">
-
-  <label>Poster</label>
+  <textarea type="text" name="description" id="description" rows="6" cols="50">
+    Esto es la descripcion
+</textarea>
+<br>
+  <input type="hidden" name="kcal" id="kcal">
+  <br>
+  <label>Tipo de comida</label>
+  <input type="text" name="typeFood" id="typeFood">
+  <br>
+  <label>Vegetariano</label>
+  <input type="checkbox" name="veget" id="veget">
+  <label>Vegano</label>
+  <input type="checkbox" name="vegan" id="vegan">
+  <br>
+  <select name="typeFood" id="typeFood">
+   <option value="Americana">Americana</option> 
+   <option value="China">China</option> 
+   <option value="Española">Española</option>
+   <option value="India">India</option> 
+   <option value="Italiana">Italiana</option> 
+   <option value="Japonesa">Japonesa</option> 
+   <option value="Turca">Turca</option> 
+   <option value="Mexicana">Mexicana</option> 
+</select>
   <input type="file" name="photo">
+  <br>
   <input type="text" name="Pos" id="Pos">
   <input type="text" name="lat" id="lat">
   <input type="text" name="lng" id="lng">
   <input type="hidden" name="author" id="author" value="jamon">
-  <input type="text" name="ingredientes" id="ingredientes" value="ingredientes" >
+  <input type="text" name="ingredients" id="ingredients" value="ingredients" >
   <button type="submit">Add movie</button>
 </form>
 

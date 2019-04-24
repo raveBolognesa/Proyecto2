@@ -2,6 +2,9 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
+const uploadCloud = require('../config/cloudinary.js');
+const ensureLoggedIn = require("../middlewares/ensureLoggedIn.js");
+const isCreator = require("../middlewares/isCreator.js");
 
 
 // Bcrypt to encrypt passwords
@@ -24,9 +27,16 @@ router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", uploadCloud.single('photo'), (req, res, next) => {
+
   const username = req.body.username;
   const password = req.body.password;
+  const email = req.body.email;
+  const phone = req.body.phone;
+  const photo = req.body.photo;
+  const rating = req.body.rating;
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
@@ -43,7 +53,13 @@ router.post("/signup", (req, res, next) => {
 
     const newUser = new User({
       username,
-      password: hashPass
+      password: hashPass,
+      email,
+      phone,
+      photo,
+      rating,
+      imgPath,
+      imgName
     });
 
     newUser.save()
@@ -55,6 +71,36 @@ router.post("/signup", (req, res, next) => {
     })
   });
 });
+
+
+
+router.get('/auth/:id/edit', [ensureLoggedIn, isCreator],(req, res, next) => { 
+  User.findOne({_id: req.params.id})
+    .then(user => {
+      
+      res.render('auth/editProfile', user);
+    })
+    .catch(err => {
+      res.render('./error', err)
+    })
+});
+
+// editado
+router.post('/auth/:id/edit', [ensureLoggedIn, isCreator], uploadCloud.single('photo'), (req, res, next) => { 
+  const { username, email, password, phone, photo, rating} = req.body;
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
+ 
+
+      User.findOneAndUpdate({_id: req.params.id}, {username, email, password, phone, photo, rating})
+        .then(celebrity => {
+          res.redirect('/profile');
+        })
+        .catch(err => {
+          res.render('./error', err)
+        })
+})
+
 
 
 // GET /auth/google

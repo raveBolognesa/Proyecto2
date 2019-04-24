@@ -1,5 +1,16 @@
-<h2>Movie details</h2>
+<h2>Food details</h2>
 
+  <img class="card-img-bottom" src="{{imgPath}}" alt="Card image cap">
 <h3>{{name}}</h3>
-<p>Genre: {{genre}}</p>
-<p>Plot: {{plot}}</p>
+<h2>{{typeFood}}</h2>
+<h2>{{kcal}}</h2>
+<h2>{{author.username}}</h2>
+<p>{{description}}</p>
+{{#each ingredients}}
+{{this.name}}
+  {{/each}}
+
+  {{#each comments}}
+{{this.text}}
+  {{/each}}
+

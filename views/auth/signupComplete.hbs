@@ -1,0 +1,26 @@
+<h2>Completa tu información</h2>
+
+<form action="/auth/{{_id}}/signupComplete" method="POST" id="form-container">
+  <label for="email">Introduce tu email</label>
+  <input id="email" type="text" name="email" placeholder="email@email.com">
+
+  <br><br>
+
+  <label for="phone">Introduce tu teléfono</label>
+  <input id="phone" type="phone" name="phone" placeholder="Tu número de teléfono">
+  
+  <br><br>
+
+  <label for="photo">Sube to imagen de perfil</label>
+  <button type="submit">Subir</button>
+  <br>
+  {{#if message }}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+
+  <br><br>
+
+  <button>Actualizar información de perfil</button>
+
+  
+</form>

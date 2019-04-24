@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require('passport');
 const router = express.Router();
+const User = require("../models/User");
 const Product = require("../models/modelProducts");
 const uploadCloud = require('../config/cloudinary.js');
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn.js");
@@ -56,7 +57,7 @@ router.get('/mapa', (req, res, next) => {
   const author = req.user.id;
   const main = new Product({name, author, description, imgPath, imgName,lat , lng, Pos})
   main.save()
-  .then(Product => {
+  .then(product => {
     res.redirect('/products');
   })
   .catch(error => {
@@ -116,7 +117,12 @@ router.get('/mapa', (req, res, next) => {
   router.get('/:id', (req, res, next) => {
     Product.findOne({_id : req.params.id})
       .then(celebrity => {
-        res.render('Products/show', celebrity)
+        User.findOne({_id : celebrity.author}).then(respuesta=>{
+          celebrity.author= respuesta
+          res.render('Products/show', celebrity)
+        })
+
+        // res.render('Products/show', celebrity)
       })
       .catch(err => {
         res.render('./error', err)
