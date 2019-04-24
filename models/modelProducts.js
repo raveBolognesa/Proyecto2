@@ -5,7 +5,7 @@ const Productschema = new Schema({
   name: String,
   description: String,
   rating: String,
-  author: String,
+  author: {type: Schema.Types.ObjectId, ref: 'User'},
   lat: Number,
   lng: Number,
   Pos: String,
