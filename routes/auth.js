@@ -79,7 +79,7 @@ router.get('/miperfil', ensureLoggedIn ,(req,res, next)=>{
 
 })
 
-router.get('/miperfil/edit/:id', ensureLoggedIn,(req, res, next) => { 
+router.get('/miperfil/:id/edit', ensureLoggedIn,(req, res, next) => { 
   User.findOne({_id: req.params.id})
     .then(user => {
       
@@ -91,7 +91,7 @@ router.get('/miperfil/edit/:id', ensureLoggedIn,(req, res, next) => {
 });
 
 // editado
-router.post('/miperfil/edit/:id', ensureLoggedIn, uploadCloud.single('photo'), (req, res, next) => { 
+router.post('/miperfil/:id/edit', ensureLoggedIn, uploadCloud.single('photo'), (req, res, next) => { 
   const { username, email, password, phone, photo, rating} = req.body;
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
