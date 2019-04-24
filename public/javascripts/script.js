@@ -72,7 +72,7 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
   places
   .forEach(place => {
     var infowindow = new google.maps.InfoWindow({
-      content: `<p>${place.name}</p>`
+      content: carta(place)
     });
     console.log(place.Pos)
     var marker = new google.maps.Marker({
