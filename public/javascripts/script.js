@@ -20,14 +20,31 @@ function startMap() {
     zoom: 15,
     center: Madrid
   });
-
+  
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
-        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        document.getElementById("localizacion").value = initialLocation
-        map.setCenter(initialLocation);
+      initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      document.getElementById("localizacion").value = initialLocation
+      map.setCenter(initialLocation);
     });
-}
+  }
+  
+  setTimeout(() => {
+    console.log("Bounds", map.getBounds())
+    console.log("first", bound.ia)
+    console.log("first", bound.na)
+    console.log("Bounds", map.getBounds())
+  }, 3000);
+  
+  var bound = map.getBounds()
+var counter = 0
+
+google.maps.event.addListener(map, 'idle', function() {
+  bound = map.getBounds()
+  console.log("change")
+  document.getElementById("onView").innerHTML = `<p>hola${counter}</p><p>bounds x ${bound.ia.j} ${bound.ia.l}</p><p>bounds y: ${bound.na.j} ${bound.na.l}</p>`
+  counter++
+});
 
 
 
@@ -54,13 +71,15 @@ function startMap() {
         });
 
 
+
   marker.addListener('click', function() {
     infowindow.open(map, marker);
   });
 
   
-        console.log(place);
-      });
+  
+  console.log(place);
+});
 
     console.log(places);
   });
