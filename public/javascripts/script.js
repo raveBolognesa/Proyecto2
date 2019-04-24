@@ -53,8 +53,6 @@ function startMap() {
   
   setTimeout(() => {
     console.log("Bounds", map.getBounds())
-    console.log("first", bound.ia)
-    console.log("first", bound.na)
     console.log("Bounds", map.getBounds())
   }, 3000);
   
@@ -91,7 +89,9 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
       console.log("change", counter)
       document.getElementById("onView").innerHTML = ""
       places.forEach(place=>{
-        document.getElementById("onView").innerHTML += carta(place)
+        if(place.lat > bound.ia.j && place.lat < bound.ia.l && place.lng > bound.na.j && place.lng < bound.na.l ){
+          document.getElementById("onView").innerHTML += carta(place)
+        }
       })
       counter++
     });
