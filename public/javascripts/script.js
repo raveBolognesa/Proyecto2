@@ -88,7 +88,7 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
       document.getElementById("onView").innerHTML = ""
       var veganos = [...places];
       check1.addEventListener("click", function filtro(){ 
-        veganos = veganos.filter((vegan)=>{
+        veganos = [...places].filter((vegan)=>{
           console.log(veganos)
           console.log(vegan)
           return vegan.vegan === true
