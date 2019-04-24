@@ -62,7 +62,7 @@ var counter = 0
 
 
 axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
-  console.log(responses.data);
+  // console.log(responses.data);
   let jam = responses.data.Product;
   let places = [];
   jam
@@ -87,10 +87,13 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
       document.getElementById("onView").innerHTML = ""
       var veganos = [...places];
       check1.addEventListener("click", function filtro(){ 
-        veganos = [...places].filter((vegan)=>{
-          console.log(veganos)
-          console.log(vegan)
-          return vegan.vegan === true
+        veganos = [...places].map((vegan)=>{
+          // console.log(veganos)
+          // console.log(vegan)
+          if(vegan.vegan === true){
+            return vegan
+          }
+          // return vegan.vegan === true
         })
         veganos.forEach(place=>{
           if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
@@ -99,11 +102,11 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
         })
         })
         console.log(veganos)
-      veganos.forEach(place=>{
-        if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
-          document.getElementById("onView").innerHTML += carta(place)
-        }
-      })
+      // veganos.forEach(place=>{
+      //   if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
+      //     document.getElementById("onView").innerHTML += carta(place)
+      //   }
+      // })
       counter++
     });
 
@@ -114,10 +117,10 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
 
   
   
-  console.log(place);
+  // console.log(place);
 });
 
-    console.log(places);
+    // console.log(places);
   });
 }
 
