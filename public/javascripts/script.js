@@ -31,6 +31,10 @@ function carta(params) {
 return texto
 }
 
+var check1 = document.getElementById("filtro1")
+
+check1.addEventListener("click", function name(){ console.log("hola")})
+
 
 
 function startMap() {
@@ -50,11 +54,6 @@ function startMap() {
       map.setCenter(initialLocation);
     });
   }
-  
-  setTimeout(() => {
-    console.log("Bounds", map.getBounds())
-    console.log("Bounds", map.getBounds())
-  }, 3000);
   
   var bound = map.getBounds()
 var counter = 0
@@ -86,9 +85,15 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
     
     google.maps.event.addListener(map, 'idle', function() {
       bound = map.getBounds()
-      console.log("change", counter)
       document.getElementById("onView").innerHTML = ""
-      places.forEach(place=>{
+      var veganos = [...places];
+      console.log(veganos)
+      check1.addEventListener("click", function filtro(){ 
+       veganos = veganos.filter((vegan)=>{
+          return vegan.vegan === true
+        })
+        })
+      veganos.forEach(place=>{
         if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
           document.getElementById("onView").innerHTML += carta(place)
         }

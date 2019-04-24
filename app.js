@@ -12,6 +12,7 @@ const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
 const passport = require('passport');
+const cors = require('cors');
 
 
 mongoose
@@ -27,6 +28,18 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
+
+
+// configuración CORS
+const whiteList = ["http://localhost:3000"]
+const corsOptions = {
+  origin: (origin, cb) => {
+    const originIsWhitelisted = whiteList.includes(origin);
+    cb(null, originIsWhitelisted)
+  },
+  credentials: true
+}
+app.use(cors(corsOptions));
 
 // Middleware Setup
 app.use(logger('dev'));
