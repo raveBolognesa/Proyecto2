@@ -82,8 +82,8 @@ axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
       title: place.name
     });
     
-    
     var filtradoVegano = [...places];
+    
     google.maps.event.addListener(map, 'idle', function() {
       bound = map.getBounds()
       document.getElementById("onView").innerHTML = ""

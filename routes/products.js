@@ -49,13 +49,16 @@ router.get('/mapa', (req, res, next) => {
   
   // creamos
   router.post('/new', uploadCloud.single('photo'), (req, res, next) => {
-
-
-  const { name, description,lat , lng, Pos } = req.body;
+  
+  var { name, description,kcal, typeFood, vegan, veget, ingredients, lat , lng, Pos } = req.body;
   const imgPath = req.file.url;
+  if(vegan === undefined){ vegan = false}else{vegan=true}
+  if(veget === undefined){ veget = false}else{veget=true}
+  typeFood = typeFood[1]
+  console.log(vegan,veget, typeFood)
   const imgName = req.file.originalname;
   const author = req.user.id;
-  const main = new Product({name, author, description, imgPath, imgName,lat , lng, Pos})
+  const main = new Product({name, author,kcal, ingredients,vegan,veget, typeFood, description, imgPath, imgName,lat , lng, Pos})
   main.save()
   .then(product => {
     res.redirect('/products');
