@@ -30,7 +30,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-slack": "0.0.7",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "swag": "^0.7.0"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"

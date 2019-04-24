@@ -17,11 +17,21 @@ function startMap() {
     lng: -3.689471916
   };
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 1,
+    zoom: 15,
     center: Madrid
   });
 
-  axios.get("http://localhost:3000/products/mapa").then(responses => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        document.getElementById("localizacion").value = initialLocation
+        map.setCenter(initialLocation);
+    });
+}
+
+
+
+  axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
     console.log(responses.data);
     let jam = responses.data.Product;
     let places = [];
@@ -30,8 +40,11 @@ function startMap() {
 
     places
       .forEach(place => {
+        var infowindow = new google.maps.InfoWindow({
+          content: `<p>${place.name}</p>`
+        });
         console.log(place.Pos)
-        new google.maps.Marker({
+        var marker = new google.maps.Marker({
           position: {
             lat: place.lat,
             lng: place.lng
@@ -40,6 +53,12 @@ function startMap() {
           title: place.name
         });
 
+
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+
+  
         console.log(place);
       });
 

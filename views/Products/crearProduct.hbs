@@ -12,9 +12,13 @@
   <input type="text" name="lat" id="lat">
   <input type="text" name="lng" id="lng">
   <input type="hidden" name="author" id="author" value="jamon">
+  <input type="text" name="ingredientes" id="ingredientes" value="ingredientes" >
   <button type="submit">Add movie</button>
 </form>
 
+<ul id="ingredienteslista"></ul>
+
+<button onclick="cambio()">hola</button>
 
   <input id="pac-input" class="controls" type="text" placeholder="Search Box">
     <div id="map"></div>
@@ -24,4 +28,4 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
    <script src="/javascripts/findMap.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0HUgfditDr8NvZjsnOmJYIwcP6AWVTqw&libraries=places&callback=initAutocomplete"></script>
- 
+   <script src="/javascripts/Ingredientes.js"></script>

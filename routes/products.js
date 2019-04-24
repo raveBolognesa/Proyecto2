@@ -6,9 +6,21 @@ const uploadCloud = require('../config/cloudinary.js');
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn.js");
 const isCreator = require("../middlewares/isCreator.js");
 
-
+// dsaa
+// document.getElementById("localizacion").value
 router.get('/', (req, res, next) => {
-  Product.find({})
+  Product.find( {}).sort({ lat: 1 })
+    .then(Product => {
+      res.render('Products/seeProduct', {Product: Product});
+    })
+    .catch(err => {
+      res.render('error', err)
+    })
+});
+
+router.get('/search/:param', (req, res, next) => {
+  let lat = req.params.param
+  Product.find( {}).sort({lng:lat})
     .then(Product => {
       res.render('Products/seeProduct', {Product: Product});
     })
@@ -38,11 +50,11 @@ router.get('/mapa', (req, res, next) => {
   router.post('/new', uploadCloud.single('photo'), (req, res, next) => {
 
 
-  const { name, description,lat , lng } = req.body;
+  const { name, description,lat , lng, Pos } = req.body;
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
   const author = req.user.id;
-  const main = new Product({name, author, description, imgPath, imgName,lat , lng})
+  const main = new Product({name, author, description, imgPath, imgName,lat , lng, Pos})
   main.save()
   .then(Product => {
     res.redirect('/products');
@@ -75,14 +87,18 @@ router.get('/mapa', (req, res, next) => {
   });
   
   // editado
-  router.post('/:id/edit', [ensureLoggedIn, isCreator],(req, res, next) => { 
-    Product.updateOne({_id: req.params.id}, req.body)
-      .then(celebrity => {
-        res.redirect('/products');
-      })
-      .catch(err => {
-        res.render('./error', err)
-      })
+  router.post('/:id/edit', [ensureLoggedIn, isCreator], uploadCloud.single('photo'), (req, res, next) => { 
+    const { name, description,lat , lng } = req.body;
+    const imgPath = req.file.url;
+    const imgName = req.file.originalname;
+   
+        Product.findOneAndUpdate({_id: req.params.id}, {name, description, imgPath, imgName,lat , lng})
+          .then(celebrity => {
+            res.redirect('/products');
+          })
+          .catch(err => {
+            res.render('./error', err)
+          })
   })
   
   
