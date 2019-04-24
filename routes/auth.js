@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
+const Coment = require("../models/coment");
 const uploadCloud = require('../config/cloudinary.js');
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn.js");
 const isCreator = require("../middlewares/isCreator.js");
@@ -73,9 +74,16 @@ router.post("/signup", uploadCloud.single('photo'), (req, res, next) => {
 });
 
 router.get('/miperfil', ensureLoggedIn ,(req,res, next)=>{
-  user =req.user
-  res.render("auth/profile", {user: user})
-
+  usuario =req.user
+  Coment.find({})
+    .then(pepino => {
+      console.log(pepino)
+      usuario.comments = pepino
+  res.render("auth/profile", {user: usuario})
+    })
+    .catch(err => {
+      res.render('./error', err)
+    })
 
 })
 

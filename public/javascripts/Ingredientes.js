@@ -1,5 +1,5 @@
 
-const ingredientes = document.querySelector("#ingredientes")
+const ingredientes = document.querySelector("#ingredients")
 
 // function name() {
 //   let x = params
@@ -21,7 +21,7 @@ function test(main) {
     
     function cambio(){
       console.log("hola")
-      var ing = document.querySelector("#ingredientes").value
+      var ing = document.querySelector("#ingredients").value
       
       axios
       .get(

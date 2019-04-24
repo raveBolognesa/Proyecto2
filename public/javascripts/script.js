@@ -1,5 +1,3 @@
-
-
 // let places = [];
 document.addEventListener(
   "DOMContentLoaded",
@@ -11,31 +9,72 @@ document.addEventListener(
 );
 
 function create(params) {
-  return `<p>hola</p><p>bounds x ${params.ia.j} ${params.ia.l}</p><p>paramss y: ${params.na.j} ${params.na.l}</p>`
+  return `<p>hola</p><p>bounds x ${params.ia.j} ${
+    params.ia.l
+  }</p><p>paramss y: ${params.na.j} ${params.na.l}</p>`;
 }
-
 
 function carta(params) {
   var texto = `<div class="card mt-3">
   <div class="card-body">
     <h5 class="card-title">cambiado${params.name}</h5>
-    <p class="card-text"><a href="/products/${params._id}">Show details</a><a href="/products/${params._id}/edit">Edit movie</a><br>${params.description}</p>
-    <p class="card-text"><small class="text-muted">${params.updated_at}</small></p>
+    <p class="card-text"><a href="/products/${
+      params._id
+    }">Show details</a><a href="/products/${
+    params._id
+  }/edit">Edit movie</a><br>${params.description}</p>
+    <p class="card-text"><small class="text-muted">${
+      params.updated_at
+    }</small></p>
 
   <form action="/products/${params._id}/delete" method="post">
     <button>Delete movie</button>
   </form> 
   </div>
   <img class="card-img-bottom" src="${params.imgPath}" alt="Card image cap">
-</div>`
-return texto
+</div>`;
+  return texto;
 }
 
-var check1 = document.getElementById("filtro1")
+var check1 = document.getElementById("filtro1");
+var check2 = document.getElementById("filtro2");
 
-check1.addEventListener("click", function name(){ console.log(check1, check1.checked , " cheker")})
+check1.addEventListener("click", function name() {
+  console.log(check1, check1.checked, " cheker");
+});
 
+var markers = [];
 
+function crearMarker(sitio, mapa) {
+  var infowindow = new google.maps.InfoWindow({
+    content: carta(sitio)
+  });
+  var marker = new google.maps.Marker({
+    position: {
+      lat: sitio.lat,
+      lng: sitio.lng
+    },
+    map: mapa,
+    title: sitio.name
+  });
+
+  marker.addListener("click", function() {
+    infowindow.open(map, marker);
+  });
+  markers.push(marker);
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setMapOnAll(null);
+}
 
 function startMap() {
   const Madrid = {
@@ -46,95 +85,116 @@ function startMap() {
     zoom: 15,
     center: Madrid
   });
-  
+
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      document.getElementById("localizacion").value = initialLocation
+    navigator.geolocation.getCurrentPosition(function(position) {
+      initialLocation = new google.maps.LatLng(
+        position.coords.latitude,
+        position.coords.longitude
+      );
+      document.getElementById("localizacion").value = initialLocation;
       map.setCenter(initialLocation);
     });
   }
-  
-  var bound = map.getBounds()
-var counter = 0
 
+  var bound = map.getBounds();
+  var counter = 0;
 
+  axios
+    .get("https://tupperwire.herokuapp.com/products/mapa")
+    .then(responses => {
+      // console.log(responses.data);
+      let jam = responses.data.Product;
+      let places = [];
+      jam.forEach(pig => places.push(pig));
 
+      places.forEach(place => {
+        crearMarker(place, map);
+      });
+      var filtradoVegano = [...places];
 
-axios.get("https://tupperwire.herokuapp.com/products/mapa").then(responses => {
-  // console.log(responses.data);
-  let jam = responses.data.Product;
-  let places = [];
-  jam
-  .forEach(pig => places.push(pig))
-  
-  places
-  .forEach(place => {
-    var infowindow = new google.maps.InfoWindow({
-      content: carta(place)
-    });
-    var marker = new google.maps.Marker({
-      position: {
-        lat: place.lat,
-        lng: place.lng
-      },
-      map: map,
-      title: place.name
-    });
-    
-    var filtradoVegano = [...places];
-    
-    google.maps.event.addListener(map, 'idle', function() {
-      bound = map.getBounds()
-      document.getElementById("onView").innerHTML = ""
-      var veganos = [...places];
-      check1.addEventListener("click", function filtro(){ 
-        if(check1.checked){
-          filtradoVegano = []
-          veganos.forEach((vegan)=>{
-            // console.log(veganos)
-            // console.log(vegan)
-            if(vegan.vegan){
-              filtradoVegano.push(vegan) 
-            }
-            // return vegan.vegan === true
-          })
-          
-        }else{
-          filtradoVegano = [...places];
-
-        }
-
-        console.log(filtradoVegano)
-        filtradoVegano.forEach(place=>{
-          if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
-            document.getElementById("onView").innerHTML += carta(place)
+      google.maps.event.addListener(map, "idle", function() {
+        bound = map.getBounds();
+        document.getElementById("onView").innerHTML = "";
+        var veganos = [...places];
+        check1.addEventListener("click", function filtro() {
+          clearMarkers();
+          document.getElementById("onView").innerHTML = "";
+          if (check1.checked) {
+            filtradoVegano = [];
+            veganos.forEach(vegan => {
+              // console.log(veganos)
+              // console.log(vegan)
+              if (vegan.vegan) {
+                filtradoVegano.push(vegan);
+              }
+              // return vegan.vegan === true
+            });
+          } else {
+            filtradoVegano = [...places];
           }
-        })
-        })
-        console.log(filtradoVegano)
-        filtradoVegano.forEach(place=>{
-        if(place.lng > bound.ia.j && place.lng < bound.ia.l && place.lat > bound.na.j && place.lat < bound.na.l ){
-          document.getElementById("onView").innerHTML += carta(place)
-        }
-      })
-      counter++
+
+          console.log("hoooola",filtradoVegano);
+          filtradoVegano.forEach(place => {
+            if (
+              place.lng > bound.ia.j &&
+              place.lng < bound.ia.l &&
+              place.lat > bound.na.j &&
+              place.lat < bound.na.l
+            ) {
+              document.getElementById("onView").innerHTML += carta(place);
+              crearMarker(place, map);
+            }
+          });
+        });
+        check2.addEventListener("click", function filtro() {
+          clearMarkers();
+          document.getElementById("onView").innerHTML = "";
+          filtradoVegano = [];
+          if (check2.checked) {
+            veganos.forEach(vegan => {
+              // console.log(veganos)
+              var partial = vegan.veget
+              if (partial) {
+                console.log(partial)
+                filtradoVegano.push(vegan);
+              }
+              // return vegan.vegan === true
+            });
+          } else {
+            filtradoVegano = [...places];
+          }
+
+          // console.log("hoooola",filtradoVegano);
+          filtradoVegano.forEach(place => {
+            if (
+              place.lng > bound.ia.j &&
+              place.lng < bound.ia.l &&
+              place.lat > bound.na.j &&
+              place.lat < bound.na.l
+            ) {
+              document.getElementById("onView").innerHTML += carta(place);
+              crearMarker(place, map);
+            }
+          });
+        });
+        filtradoVegano.forEach(place => {
+          if (
+            place.lng > bound.ia.j &&
+            place.lng < bound.ia.l &&
+            place.lat > bound.na.j &&
+            place.lat < bound.na.l
+          ) {
+            document.getElementById("onView").innerHTML += carta(place);
+          }
+        });
+        counter++;
+      });
+
+      // console.log(place);
+
+      // console.log(places);
     });
-
-
-  marker.addListener('click', function() {
-    infowindow.open(map, marker);
-  });
-
-  
-  
-  // console.log(place);
-});
-
-    // console.log(places);
-  });
 }
-
-
 
 startMap();
