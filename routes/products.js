@@ -8,13 +8,14 @@ const ensureLoggedIn = require("../middlewares/ensureLoggedIn.js");
 const isCreator = require("../middlewares/isCreator.js");
 
 const Swag = require('swag');
+require('dotenv').config();
 
 // dsaa
 // document.getElementById("localizacion").value
 router.get('/', (req, res, next) => {
   Product.find( {}).sort({ lat: 1 })
     .then(Product => {
-      res.render('Products/seeProduct', {Product: Product});
+      res.render('Products/seeProduct', {Product: Product });
     })
     .catch(err => {
       res.render('error', err)
@@ -34,8 +35,24 @@ router.get('/search/:param', (req, res, next) => {
 
 router.get('/mapa', (req, res, next) => {
   Product.find({})
-    .then(Product => {
-      res.json({Product: Product});
+    .then(AllProducts => {
+      // if (req.user)
+      AllProducts = AllProducts.map(product => {
+        console.log(req.user._id)
+        console.log(product.author)
+        console.log(req.user._id === product.author)
+        if (req.user._id.toString() === product.author.toString()) {
+          product.currentUserIsAuthor = true
+        } else {
+          product.currentUserIsAuthor = false
+        }
+
+        return product
+      })
+
+      // console.log(AllProducts)
+
+      res.json({Product: AllProducts});
     })
     .catch(err => {
       res.render('error', err)
@@ -62,10 +79,9 @@ router.get('/mapa', (req, res, next) => {
   if(veget === undefined){ veget = false}else{veget=true}
   typeFood = typeFood[1]
   console.log(vegan,veget, typeFood)
-  const imgPath = req.file.url;
   const imgName = req.file.originalname;
   const author = req.user.id;
-  const main = new Product({name, author,kcal, ingredients,vegan,veget, typeFood, description, photo, imgPath, imgName,lat , lng, Pos})
+  const main = new Product({name, author,kcal, ingredients,vegan,veget, typeFood, description, imgPath, imgName,lat , lng, Pos})
   main.save()
   .then(
     res.redirect('/products')

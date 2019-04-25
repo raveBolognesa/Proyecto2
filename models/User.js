@@ -11,6 +11,7 @@ const userSchema = new Schema({
   imgPath: String,
   imgName: String,
   comments: Array,
+  allMyProducts: Array
 
 }, {
   timestamps: {
