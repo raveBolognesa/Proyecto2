@@ -1,4 +1,3 @@
-
 // let places = [];
 document.addEventListener(
   "DOMContentLoaded",
@@ -21,22 +20,23 @@ function carta(params) {
     <h5 class="card-title">${params.name}</h5>
     <p class="card-text"><a href="/products/${
       params._id
-    }">Show details</a><a href="/products/${
-    params._id
-  }/edit">Edit movie</a><br>${params.description}</p>
+    }">Show details</a><br>${params.description}</p>
     <p class="card-text"><small class="text-muted">${
       params.updated_at
-    }</small></p>`
+    }</small></p>`;
 
-    if (params.currentUserIsAuthor){
-      texto += `<form action="/products/${params._id}/delete" method="post">
+  if (params.currentUserIsAuthor) {
+    texto += `<form action="/products/${params._id}/delete" method="post">
         <button>Delete movie</button>
-      </form> `
-    }
+      </form> <a href="/products/${params._id}/edit">Edit movie</a>`;
+  }
 
-  
-    texto += `</div>
-  <img src="${params.imgPath}" alt="Card image cap" style="background-image: url(${params.imgPath}); object-fit: cover; width: 100%; height: 230px; ">
+  texto += `</div>
+  <img src="${
+    params.imgPath
+  }" alt="Card image cap" style="background-image: url(${
+    params.imgPath
+  }); object-fit: cover; width: 100%; height: 230px; ">
 </div>`;
   return texto;
 }
@@ -172,10 +172,10 @@ function startMap() {
 
   var bound = map.getBounds();
   var counter = 0;
-  
+
   axios
-  // .get("https://tupperwire.herokuapp.com/products/mapa")
-  .get("http://localhost:3000/products/mapa")
+    // .get("https://tupperwire.herokuapp.com/products/mapa")
+    .get("http://localhost:3000/products/mapa")
     .then(responses => {
       // console.log(responses.data);
       let jam = responses.data.Product;

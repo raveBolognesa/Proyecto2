@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,21 +10,25 @@
   <title>{{title}}</title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
-<body >
 
-  <nav class="nav justify-content nav-pills nav-fill p-3 align-items-center" >
-    <a href="/"><img src="/images/logoCortado.png" alt="" style="width: 60px;height:70px !important;" ></a>
-    <a class="p-3 m-3 nav-link active shadow" href="/auth/login">Login</a>
-    <a class="p-3 m-3 nav-link active shadow" href="/auth/signup">Signup</a>
-    <a class="p-3 m-3 nav-link active shadow" href="/products">Productos</a>
-    <a class="p-3 m-3 nav-link active shadow" href="/auth/miperfil">perfil</a>
+<body>
+
+  <nav class="nav justify-content nav-pills nav-fill p-3 align-items-center">
+    <a href="/"><img src="/images/logoCortado.png" alt="" style="width: 60px;height:70px !important;"></a>
+    <a class="p-3 m-3 nav-link active shadow" href="/products">Productos</a>{{#if user}}
+    <a class="p-3 m-3 nav-link active shadow" href="/auth/miperfil/{{user.id}}">Perfil</a>{{/if}}
+
+    <img src="{{user.imgPath}}" alt="" id="avatar">
 
     {{#if user}}
     <a class="p-3 m-3 nav-link active" href="/auth/logout">Logout</a>
-
+    {{else}}
+    <a class="p-3 m-3 nav-link active shadow" href="/auth/login">Login</a>
+    <a class="p-3 m-3 nav-link active shadow" href="/auth/signup">Signup</a>
     {{/if}}
   </nav>
 
   {{{body}}}
 </body>
+
 </html>

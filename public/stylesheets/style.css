@@ -50,4 +50,13 @@ a {
 .btn-danger {
   background-image: linear-gradient(to bottom right, #FF1B2E, #FF530E) !important; }
 
+#avatar {
+  border-radius: 50%;
+  width: 60px;
+  height: auto;
+  position: absolute;
+  z-index: 1;
+  right: 75px;
+  top: 75px; }
+
 /*# sourceMappingURL=style.css.map */

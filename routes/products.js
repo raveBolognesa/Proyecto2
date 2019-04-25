@@ -15,7 +15,7 @@ require('dotenv').config();
 router.get('/', (req, res, next) => {
   Product.find( {}).sort({ lat: 1 })
     .then(Product => {
-      res.render('Products/seeProduct', {Product: Product });
+      res.render('Products/seeProduct', {Product: Product, user: req.user });
     })
     .catch(err => {
       res.render('error', err)
@@ -26,7 +26,7 @@ router.get('/search/:param', (req, res, next) => {
   let lat = req.params.param
   Product.find( {}).sort({lng:lat})
     .then(Product => {
-      res.render('Products/seeProduct', {Product: Product});
+      res.render('Products/seeProduct', {Product: Product, user: req.user});
     })
     .catch(err => {
       res.render('error', err)
@@ -62,7 +62,7 @@ router.get('/mapa', (req, res, next) => {
   
   router.get('/new', ensureLoggedIn, (req, res, next) => {
     console.log(req.user)
-    res.render('Products/crearProduct');
+    res.render('Products/crearProduct',{user: req.user} );
   })
 
 
@@ -146,7 +146,7 @@ router.get('/mapa', (req, res, next) => {
       .then(celebrity => {
         User.findOne({_id : celebrity.author}).then(respuesta=>{
           celebrity.author= respuesta
-          res.render('Products/show', celebrity)
+          res.render('Products/show', {celebrity: celebrity, user: req.user})
         })
 
         // res.render('Products/show', celebrity)
