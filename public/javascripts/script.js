@@ -174,9 +174,7 @@ function startMap() {
   var counter = 0;
   
   axios
-  // .get("https://tupperwire.herokuapp.com/products/mapa")
-  .get("http://localhost:3000/products/mapa")
-  // .get(`${this.env.URLJSON}`)
+  .get("https://tupperwire.herokuapp.com/products/mapa")
     .then(responses => {
       // console.log(responses.data);
       let jam = responses.data.Product;
