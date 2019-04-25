@@ -1,36 +1,41 @@
+<div class="row">
+<div class="card col-5 mr-4 shadow">
   
- <h2>Perfil de {{user.username}}</h2>
- <a href="/auth/miperfil/{{user.id}}/edit">Editar perfil</a>
- 
- 
+  <img src="{{user.imgPath}}"   alt="" style=" border-radius:50%; margin: 20px  0 20px 170px;height:200px;width:200px;" >
 <div>
-  <img src="{{user.imgPath}}" alt="" width="200px" height="auto">
+  <h2  class="ml-2">Perfil de {{user.username}}</h2><br>
+  <a href="/auth/miperfil/{{user.id}}/edit" class="active m-2 p-2 rounded text-white shadow" >Editar perfil</a><br><br>
+
 </div>
 <h2>Datos de contacto:</h2>
 <h3>{{user.email}}</h3>
 <h3>{{user.phone}}</h3>
 <h2>{{product.name}}</h2>
 
-
-  <p><a href="/auth/miperfil/{{user.id}}/edit">editar</a></p>
-
-
-<div id="myRecipes">
-  {{#each user.allMyProducts}}
-  <a href="#">{{this.name}}</a>
-  <img src="{{this.imgPath}}" alt="">
-  {{/each}}
-</div>
-
-<h2>Comentarios sobre el usuario</h2>
+<h2>Comment profile</h2>
 <form action="/coment" method="post" enctype="multipart/form-data" id="{{ this._id }}">
   <input type="hidden" value="{{ this._id }}" name="id">
   <input type="text" name="name">
   <input type="file" name="photo">
   <input type="submit" value="Save">
 </form>
+</div>
+
+
+
+<div class=" col-5 ml-4" style="overflow: scroll; height:600px">
+  {{#each user.allMyProducts}}
+  <div class="card  shadow" >
+  {{this}}
+  <img src="{{this.imgPath}}" alt="">
+  <div>
+  {{/each}}
+</div>
+</div>
 <div>
+  {{user.comments}}
   {{#each user.comments}}
+
   <h3>Soy un comentario {{ this.name }} {{this._id}}</h3>
   <img src="{{ this.path }}" alt="{{ this.originalName }}" />
   <form action="/coment/{{this._id}}/delete" method="post">

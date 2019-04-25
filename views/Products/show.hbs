@@ -1,12 +1,33 @@
-<h2>Food details</h2>
 
-  <img class="card-img-bottom" src="{{imgPath}}" alt="Card image cap">
-<h2>Nombre del tupper: {{name}}</h2>
-<h2>Nombre del chef: {{author.username}}</h2>
-<h2>Tipo de comida: {{typeFood}}</h2>
-<h2>Kcalorias del plato: {{kcal}}</h2>
+<div class="row">
+  <div class="card shadow-lg" style="width: 40rem;">
+  <div class="card-img-top" src="{{this.celebrity.imgPath}}" alt="Card image cap" height="200px" style="background-image: url({{this.celebrity.imgPath}}); object-fit: cover; width: 100%; height: 330px; "></div>
+  <div class="card-body">
+    <h5 class="card-title">{{this.celebrity.name}}</h5>
+    <h6 class="card-title">Creado por: <a href="/auth/miperfil/{{this.celebrity.author.id}}">{{this.celebrity.author.username}}</a></h6>
+    <h6>Mandar whatsapp al Creador <a href="https://api.whatsapp.com/send?phone={{this.celebrity.author.phone}}"><i class="fab fa-whatsapp"></i></a></h6>
+    <p class="card-text">{{this.celebrity.description}}</p>
+    <div class="card-text">Estos son mis ingredientes:
+      <ul>
+      {{#each this.celebrity.ingredients}}
+<li>
+<p>{{this}}</p></li>
 
-<p>Descripción del plato: {{description}}</p>
+  {{/each}}</ul></div>
+  {{#is this.celebrity.author.username this.user.username}}
+    <a href="/products/{{id}}/edit" class="btn btn-primary">Edit post</a>{{/is}}
+  </div>
+</div>
+{{!-- <div class="card col-6 mr-5">
+
+  <img class="card-img-top" src="{{imgPath}}" alt="Card image cap">
+
+  <h2>Food details</h2>
+  <h3>{{name}}</h3>
+<h2>{{typeFood}}</h2>
+<h2>{{kcal}}</h2>
+<h2>{{author.username}}</h2>
+<p>{{description}}</p>
 {{#each ingredients}}
 {{ingredients}}
 {{this}}
@@ -15,13 +36,14 @@
   {{#each comments}}
 {{this.text}}
   {{/each}}
-
-<div id="pep" style="width: 100%;
-   height: 400px;
-   background-color: grey;"></div>
-<input type="hidden" id="lat" value="{{lat}}">
-<input type="hidden" id="lng" value="{{lng}}">
-
+</div> --}}
+<div class="card col-5 ml-3 shadow-lg" id="pep" style="width: 100%;
+   height: 840px;
+   background-color: grey;">
+<input type="hidden" id="lat" value="{{this.celebrity.lat}}">
+<input type="hidden" id="lng" value="{{this.celebrity.lng}}">
+</div>
+</div>
     <script>
    console.log(Lat)
    var Lng =   +document.querySelector("#lng").value
@@ -31,9 +53,18 @@ function initMap() {
   var uluru = {lat: Lat, lng: Lng};
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('pep'), {zoom: 4, center: uluru});
+      document.getElementById('pep'), {zoom: 15, center: uluru});
   // The marker, positioned at Uluru
   var marker = new google.maps.Marker({position: uluru, map: map});
 }
     </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0HUgfditDr8NvZjsnOmJYIwcP6AWVTqw&callback=initMap"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+
+<style>
+  body{
+    background-color: whitesmoke;
+  }
+</style>

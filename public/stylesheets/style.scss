@@ -9,6 +9,10 @@ a {
   color: #00B7FF;
 }
 
+.active{
+  background-image: linear-gradient(to bottom right, #00EBD2, #3CB9E9) !important;
+}
+
 
 #map {
   width: 300px;
@@ -54,12 +58,27 @@ a {
 
 }
 
-img{
-  height: 200px;
-}
+
 
 #myRecipes {
   padding: 5px;
   margin: 200px 0;
   border: 1px solid black;
+}
+
+.btn-danger{
+
+  background-image: linear-gradient(to bottom right, #FF1B2E, #FF530E) !important;
+
+}
+
+
+#avatar{
+  border-radius: 50%;
+  width: 60px;
+  height: auto;
+  position: absolute;
+  z-index: 1;
+  right: 75px;
+  top: 75px;
 }

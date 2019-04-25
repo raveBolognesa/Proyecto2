@@ -6,6 +6,7 @@ const Coment = require("../models/coment");
 const uploadCloud = require("../config/cloudinary.js");
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn.js");
 const isCreator = require("../middlewares/isCreator.js");
+const isRafa = require("../middlewares/isRafa.js");
 const Swag = require("swag");
 var mongoose = require('mongoose')
 const Product = require("../models/modelProducts");
@@ -17,7 +18,7 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 router.get("/login", (req, res, next) => {
-  res.render("auth/login", { message: req.flash("error") });
+  res.render("auth/login", { message: req.flash("error"), user: req.user });
 });
 
 router.post(
@@ -31,7 +32,7 @@ router.post(
 );
 
 router.get("/signup", (req, res, next) => {
-  res.render("auth/signup");
+  res.render("auth/signup", {user: req.user});
 });
 
 router.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
@@ -107,7 +108,7 @@ router.get("/miperfil", ensureLoggedIn, (req, res, next) => {
     });
 });
 
-router.get("/miperfil/:userid", ensureLoggedIn, (req, res, next) => {
+router.get("/miperfil/:userid", ensureLoggedIn,  (req, res, next) => {
   User.findOne({ _id: req.params.userid }).then(usuario=>{
 
     Coment.find({creatorId: mongoose.Types.ObjectId(req.params.userid)})
@@ -130,7 +131,7 @@ router.get("/miperfil/:userid", ensureLoggedIn, (req, res, next) => {
   // usuario = req.params.us;
 });
 
-router.get("/miperfil/:id/edit", ensureLoggedIn, (req, res, next) => {
+router.get("/miperfil/:id/edit",isRafa,  ensureLoggedIn, (req, res, next) => {
   User.findOne({ _id: req.params.id })
     .then(user => {
       res.render("auth/editProfile", { user: user });

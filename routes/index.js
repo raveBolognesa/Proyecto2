@@ -10,7 +10,7 @@ const Swag = require('swag');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
-  res.render('index');
+  res.render('index', {user: req.user});
 });
 
 
