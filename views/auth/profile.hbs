@@ -1,3 +1,14 @@
-  <p>{{user}}</p>
+  
+ <h2>Perfil de {{user.username}}</h2>
+ <a href="/auth/miperfil/{{user.id}}/edit">Editar perfil</a>
 
-  <p><a href="/auth/miperfil/{{user.id}}/edit">editar</a></p>
+<div>
+<img src="{{user.imgPath}}" alt="" width="200px" height="auto">
+</div>
+<h2>Datos de contacto:</h2>
+<h3>{{user.email}}</h3>
+<h3>{{user.phone}}</h3>
+<h2>{{product.name}}</h2>
+
+
+  
