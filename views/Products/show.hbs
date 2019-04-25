@@ -1,11 +1,12 @@
 <h2>Food details</h2>
 
   <img class="card-img-bottom" src="{{imgPath}}" alt="Card image cap">
-<h3>{{name}}</h3>
-<h2>{{typeFood}}</h2>
-<h2>{{kcal}}</h2>
-<h2>{{author.username}}</h2>
-<p>{{description}}</p>
+<h2>Nombre del tupper: {{name}}</h2>
+<h2>Nombre del chef: {{author.username}}</h2>
+<h2>Tipo de comida: {{typeFood}}</h2>
+<h2>Kcalorias del plato: {{kcal}}</h2>
+
+<p>Descripción del plato: {{description}}</p>
 {{#each ingredients}}
 {{ingredients}}
 {{this}}

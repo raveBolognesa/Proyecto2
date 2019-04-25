@@ -4,7 +4,7 @@
  
  
 <div>
-<img src="{{user.imgPath}}" alt="" width="200px" height="auto">
+  <img src="{{user.imgPath}}" alt="" width="200px" height="auto">
 </div>
 <h2>Datos de contacto:</h2>
 <h3>{{user.email}}</h3>
@@ -15,38 +15,38 @@
   <p><a href="/auth/miperfil/{{user.id}}/edit">editar</a></p>
 
 
-  <div id="myRecipes">
-    {{#each user.allMyProducts}}
-      {{this.name}}
-      <img src="{{this.imgPath}}" alt="">
-    {{/each}}
-  </div>
+<div id="myRecipes">
+  {{#each user.allMyProducts}}
+  <a href="#">{{this.name}}</a>
+  <img src="{{this.imgPath}}" alt="">
+  {{/each}}
+</div>
 
-  <h2>Comment photo</h2>
-  <form action="/coment" method="post" enctype="multipart/form-data" id="{{ this._id }}">
-    <input type="hidden" value="{{ this._id }}" name="id">
-    <input type="text" name="name">
-    <input type="file" name="photo">
-    <input type="submit" value="Save">
-  </form>
- <div>
-     {{#each user.comments}}
-     <h3>Soy un comentario {{ this.name }} {{this._id}}</h3>
-    <img src="{{ this.path }}" alt="{{ this.originalName }}" />
-    <form action="/coment/{{this._id}}/delete" method="post">
-    <button>Delete coment {{this._id}}</button>
-  </form> 
-
-  <h2>Edit record</h2>
-
-<form action="/coment/{{_id}}/edit" method="post" enctype="multipart/form-data" >
-  <label for="name">Name: </label>
-  <input type="text" name="name" id="name" value="{{name}}">
-  <label for="occupation">Occupation: </label>
-  <input type="text" name="occupation" id="occupation" value="{{occupation}}">
-  <label for="catchPhrase">Catch phrase: </label>
-  <input type="text" name="catchPhrase" id="catchPhrase" value="{{catchPhrase}}">
-  <button type="submit">Send</button>
+<h2>Comentarios sobre el usuario</h2>
+<form action="/coment" method="post" enctype="multipart/form-data" id="{{ this._id }}">
+  <input type="hidden" value="{{ this._id }}" name="id">
+  <input type="text" name="name">
+  <input type="file" name="photo">
+  <input type="submit" value="Save">
 </form>
-    {{/each}}
- </div>
+<div>
+  {{#each user.comments}}
+  <h3>Soy un comentario {{ this.name }} {{this._id}}</h3>
+  <img src="{{ this.path }}" alt="{{ this.originalName }}" />
+  <form action="/coment/{{this._id}}/delete" method="post">
+    <button>Delete coment {{this._id}}</button>
+  </form>
+
+  <h2>Edita tu comentario</h2>
+
+  <form action="/coment/{{_id}}/edit" method="post" enctype="multipart/form-data">
+    <label for="name">Name: </label>
+    <input type="text" name="name" id="name" value="{{name}}">
+    <label for="occupation">Occupation: </label>
+    <input type="text" name="occupation" id="occupation" value="{{occupation}}">
+    <label for="catchPhrase">Catch phrase: </label>
+    <input type="text" name="catchPhrase" id="catchPhrase" value="{{catchPhrase}}">
+    <button type="submit">Send</button>
+  </form>
+  {{/each}}
+</div>

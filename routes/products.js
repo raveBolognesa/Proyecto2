@@ -70,11 +70,12 @@ router.get('/mapa', (req, res, next) => {
   // creamos
   router.post('/new', uploadCloud.single('photo'), (req, res, next) => {
   
-  var { name, description, typeFood,photo, vegan, veget, lat , lng, Pos } = req.body;
+  var { name, description, typeFood, vegan, veget, lat , lng, Pos } = req.body;
   var ingredients = req.body.listIngredientes.split(",")
   var kcal = 3
   console.log(ingredients)
   console.log(kcal)
+  const imgPath = req.file.url;
   if(vegan === undefined){ vegan = false}else{vegan=true}
   if(veget === undefined){ veget = false}else{veget=true}
   typeFood = typeFood[1]
