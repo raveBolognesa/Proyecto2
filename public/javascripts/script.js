@@ -175,6 +175,7 @@ function startMap() {
   
   axios
   .get("https://tupperwire.herokuapp.com/products/mapa")
+  // .get("http://localhost:3000/products/mapa")
   // .get(`${this.env.URLJSON}`)
     .then(responses => {
       // console.log(responses.data);
