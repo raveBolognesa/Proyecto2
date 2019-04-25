@@ -18,6 +18,7 @@ a {
   z-index: 1; }
 
 #up {
+  top: 40px;
   position: absolute;
   z-index: 2; }
 
