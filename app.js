@@ -13,6 +13,8 @@ const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
 const passport = require('passport');
 const cors = require('cors');
+const swag = require("swag");
+swag.registerHelpers(hbs);
 
 
 mongoose

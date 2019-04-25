@@ -7,6 +7,9 @@ const uploadCloud = require('../config/cloudinary.js');
 const ensureLoggedIn = require("../middlewares/ensureLoggedIn.js");
 const isCreator = require("../middlewares/isCreator.js");
 
+const Swag = require('swag');
+
+Swag.registerHelpers(Handlebars);
 // dsaa
 // document.getElementById("localizacion").value
 router.get('/', (req, res, next) => {
