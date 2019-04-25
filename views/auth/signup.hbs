@@ -1,36 +1,56 @@
+
+<div class="card p-3 shadow" style="width: 18rem;">
 <h2>Signup</h2>
 
 <form action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
+   <div class="form-group">
   <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="JonSnow">
-
-  <br><br>
-
+  <input class="form-control"  id="username" type="text" name="username" placeholder="JonSnow">
+</div>
+ <div class="form-group">
   <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password">
-  <br>
+  <input class="form-control"  id="password" type="password" name="password" placeholder="Your password">
+ </div>
+  <div class="form-group">
     <label for="email">Introduce tu email</label>
-  <input id="email" type="text" name="email" placeholder="email@email.com">
-
-  <br><br>
-
+  <input class="form-control"  id="email" type="text" name="email" placeholder="email@email.com">
+</div>
+ <div class="form-group">
   <label for="phone">Introduce tu teléfono</label>
-  <input id="phone" type="phone" name="phone" placeholder="Tu número de teléfono">
+  <input class="form-control"  id="phone" type="phone" name="phone" placeholder="Tu número de teléfono">
+  </div>
+  <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Upload</span>
+  </div>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile01" name="photo">
+    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+  </div>
+</div>
   
-  <br><br>
-  <input type="file" name="photo">
-  
-  <br>
+ 
   {{#if message }}
     <div class="error-message">{{ message }}</div>
   {{/if}}
 
-  <br><br>
+ <br>
 
-  <button>Create account</button>
+  <button class="btn active text-white mb-3">Create account</button>
 
   <p class="account-message">
-    Do you already have an account?
+    Have an account?
     <a href="/auth/login">Login</a>
   </p>
 </form>
+</div>
+
+
+
+<style>
+  body{
+    background-image: url("https://images.unsplash.com/photo-1475090169767-40ed8d18f67d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    background-repeat: no-repeat;
+    background-size: 100%; 
+  }
+</style>

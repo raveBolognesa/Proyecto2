@@ -1,27 +1,38 @@
-
+<div class="card p-3 shadow" style="width: 18rem;">
 <h2>Login</h2>
 
 <form action="/auth/login" method="POST" id="form-container">
+  <div class="form-group">
   <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="JonSnow">
-
+  <input class="form-control"  id="username" type="text" name="username" placeholder="JonSnow">
+</div>
   <br><br>
 
+<div class="form-group">
   <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password">
-  <br>
+  <input class="form-control"  id="password" type="password" name="password" placeholder="Your password">
+ </div>
   {{#if message }}
     <div class="error-message">{{ message }}</div>
   {{/if}}
 
   <br><br>
 
-  <button>Login</button>
-
+  <button class="btn active mb-4 shadow" style="color: white">Login</button>
+<div class="form-group">
   <p class="account-message">
     Don't have an account yet?
     <a href="/auth/signup">Signup</a>
-  </p>
+  </p></div>
 </form>
 
+</div>
 
+<style>
+  body{
+    background-image: url("https://images.unsplash.com/photo-1450152021501-598b36b17449?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%; 
+  }
+</style>
