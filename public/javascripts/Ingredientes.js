@@ -7,8 +7,10 @@ const ingredientes = document.querySelector("#ingredients")
 //   pos.value += z
 // }
 
-function test(main) {
-  document.querySelector("#Pos").value += main
+function test(main,second) {
+  document.querySelector("#listIngredientes").value += `${main},`
+  document.querySelector("#kcal").value += `${second},`
+  document.querySelector("#ingredienteslista").innerHTML = " "
 }
 // function name() {
   //   axios
@@ -36,7 +38,7 @@ function test(main) {
                         
 
             let listaItem = document.createElement("li")
-            listaItem.innerHTML = `label ${x.label} brand: ${x.brand} <br> <p>Kcals: ${x.nutrients.ENERC_KCAL}</p> <button onclick="test(${x.nutrients.ENERC_KCAL})">mandar datos</button>`
+            listaItem.innerHTML = `label ${x.label} brand: ${x.brand} <br> <p>Kcals: ${x.nutrients.ENERC_KCAL}</p> <button onclick="test('${x.label}',${x.nutrients.ENERC_KCAL})">mandar datos</button>`
             document.querySelector("#ingredienteslista").appendChild(listaItem)
             
 

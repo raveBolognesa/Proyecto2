@@ -58,8 +58,8 @@ function crearMarker(sitio, mapa) {
     title: sitio.name
   });
 
-  marker.addListener("click", function() {
-    infowindow.open(map, marker);
+  marker.addListener("click", function(mapa) {
+    infowindow.open(mapa, marker);
   });
   markers.push(marker);
 }
@@ -81,21 +81,89 @@ function startMap() {
     lat: 40.4577381,
     lng: -3.689471916
   };
-  const map = new google.maps.Map(document.getElementById("map"), {
+  const map = new google.maps.Map(document.getElementById("mapBig"), {
     zoom: 15,
-    center: Madrid
+    center: Madrid,
+    styles: [
+      {
+        featureType: "landscape.natural",
+        elementType: "geometry.fill",
+        stylers: [
+          {
+            visibility: "on"
+          },
+          {
+            color: "#e0efef"
+          }
+        ]
+      },
+      {
+        featureType: "poi",
+        elementType: "geometry.fill",
+        stylers: [
+          {
+            visibility: "on"
+          },
+          {
+            hue: "#1900ff"
+          },
+          {
+            color: "#c0e8e8"
+          }
+        ]
+      },
+      {
+        featureType: "road",
+        elementType: "geometry",
+        stylers: [
+          {
+            lightness: 100
+          },
+          {
+            visibility: "simplified"
+          }
+        ]
+      },
+      {
+        featureType: "road",
+        elementType: "labels",
+        stylers: [
+          {
+            visibility: "off"
+          }
+        ]
+      },
+      {
+        featureType: "transit.line",
+        elementType: "geometry",
+        stylers: [
+          {
+            visibility: "on"
+          },
+          {
+            lightness: 700
+          }
+        ]
+      },
+      {
+        featureType: "water",
+        elementType: "all",
+        stylers: [
+          {
+            color: "#7dcdcd"
+          }
+        ]
+      }
+    ]
   });
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      initialLocation = new google.maps.LatLng(
-        position.coords.latitude,
-        position.coords.longitude
-      );
-      document.getElementById("localizacion").value = initialLocation;
-      map.setCenter(initialLocation);
-    });
-  }
+  navigator.geolocation.getCurrentPosition(function(position) {
+    initialLocation = new google.maps.LatLng(
+      position.coords.latitude,
+      position.coords.longitude
+    );
+    map.setCenter(initialLocation);
+  });
 
   var bound = map.getBounds();
   var counter = 0;
@@ -134,7 +202,7 @@ function startMap() {
             filtradoVegano = [...places];
           }
 
-          console.log("hoooola",filtradoVegano);
+          console.log("hoooola", filtradoVegano);
           filtradoVegano.forEach(place => {
             if (
               place.lng > bound.ia.j &&
@@ -154,9 +222,9 @@ function startMap() {
           if (check2.checked) {
             veganos.forEach(vegan => {
               // console.log(veganos)
-              var partial = vegan.veget
+              var partial = vegan.veget;
               if (partial) {
-                console.log(partial)
+                console.log(partial);
                 filtradoVegano.push(vegan);
               }
               // return vegan.vegan === true
@@ -186,6 +254,7 @@ function startMap() {
             place.lat < bound.na.l
           ) {
             document.getElementById("onView").innerHTML += carta(place);
+            crearMarker(place, map);
           }
         });
         counter++;

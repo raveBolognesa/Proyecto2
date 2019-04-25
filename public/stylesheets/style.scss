@@ -1,6 +1,8 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+  
 }
 
 a {
@@ -9,8 +11,38 @@ a {
 
 
 #map {
-  height: 500px;
-  width: 100%;
+  width: 300px;
+  height: 400px;
+}
+
+#mapBig {
+  position:absolute;
+  width:100%;
+  min-height:100%;
+  top:0px;
+  left:0px;
+  z-index:1;
+}
+
+#up{
+ 
+  position:absolute;
+  z-index:2;
+}
+
+#filters{
+  top: 40px;
+  right: 30px;
+  width: 130px;
+  position:absolute;
+  z-index:2;
+}
+
+#barra{
+  top: 140px;
+  left: 60px;
+  position:absolute;
+  z-index:2;
 }
 
 
@@ -18,4 +50,8 @@ a {
   height: 500px;
   width: 100%;
 
+}
+
+img{
+  height: 200px;
 }
