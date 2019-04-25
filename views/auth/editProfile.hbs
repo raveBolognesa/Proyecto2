@@ -2,24 +2,26 @@
 
 <form action="/auth/miperfil/{{user._id}}/edit" method="POST" id="form-container" enctype="multipart/form-data">
   <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="{{user.username}}">
+  <input id="username" type="text" name="username" value="{{user.username}}">
 
   <br><br>
 
   <label for="email">Introduce tu email</label>
-  <input id="email" type="text" name="email" placeholder="email@email.com">
+  <input id="email" type="text" name="email" value="{{user.email}}">
 
   <br><br>
 
   <label for="phone">Introduce tu teléfono</label>
-  <input id="phone" type="phone" name="phone" placeholder="{{user.phone}}">
-  
+  <input id="phone" type="phone" name="phone" value="{{user.phone}}">
   <br><br>
+  <label for="photo">Sube to imagen de perfil:   </label>
 
-  <label for="photo">Sube to imagen de perfil</label>
+  <input type="file" name="photo" value="{{user.photo}}">
+  <br><br>
+ <button type="submit">Actualizar </button>
 
-  <input type="file" name="photo">
-  <button type="submit">send </button>
+
+  
   <br>
   {{#if message }}
     <div class="error-message">{{ message }}</div>
@@ -30,5 +32,5 @@
 
   <p>{{user}}</p>
 
-  
 </form>
+
