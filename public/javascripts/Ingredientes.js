@@ -1,5 +1,5 @@
 
-const ingredientes = document.querySelector("#ingredientes")
+const ingredientes = document.querySelector("#ingredients")
 
 // function name() {
 //   let x = params
@@ -7,8 +7,10 @@ const ingredientes = document.querySelector("#ingredientes")
 //   pos.value += z
 // }
 
-function test(main) {
-  document.querySelector("#Pos").value += main
+function test(main,second) {
+  document.querySelector("#listIngredientes").value += `${main},`
+  document.querySelector("#kcal").value += `${second},`
+  document.querySelector("#ingredienteslista").innerHTML = " "
 }
 // function name() {
   //   axios
@@ -21,7 +23,7 @@ function test(main) {
     
     function cambio(){
       console.log("hola")
-      var ing = document.querySelector("#ingredientes").value
+      var ing = document.querySelector("#ingredients").value
       
       axios
       .get(
@@ -36,7 +38,7 @@ function test(main) {
                         
 
             let listaItem = document.createElement("li")
-            listaItem.innerHTML = `label ${x.label} brand: ${x.brand} <br> <p>Kcals: ${x.nutrients.ENERC_KCAL}</p> <button onclick="test(${x.nutrients.ENERC_KCAL})">mandar datos</button>`
+            listaItem.innerHTML = `label ${x.label} brand: ${x.brand} <br> <p>Kcals: ${x.nutrients.ENERC_KCAL}</p> <button onclick="test('${x.label}',${x.nutrients.ENERC_KCAL})">mandar datos</button>`
             document.querySelector("#ingredienteslista").appendChild(listaItem)
             
 

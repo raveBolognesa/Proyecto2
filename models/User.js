@@ -9,7 +9,8 @@ const userSchema = new Schema({
   photo: String,
   rating: Number,
   imgPath: String,
-  imgName: String
+  imgName: String,
+  comments: Array,
 
 }, {
   timestamps: {

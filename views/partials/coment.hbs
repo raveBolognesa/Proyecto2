@@ -1,0 +1,17 @@
+<h3>Soy un comentario {{ this.name }} {{this._id}}</h3>
+    <img src="{{ this.path }}" alt="{{ this.originalName }}" />
+    <form action="/coment/{{this._id}}/delete" method="post">
+    <button>Delete coment {{this._id}}</button>
+  </form> 
+
+  <h2>Edit record</h2>
+
+<form action="/coment/{{_id}}/edit" method="post">
+  <label for="name">Name: </label>
+  <input type="text" name="name" id="name" value="{{name}}">
+  <label for="occupation">Occupation: </label>
+  <input type="text" name="occupation" id="occupation" value="{{occupation}}">
+  <label for="catchPhrase">Catch phrase: </label>
+  <input type="text" name="catchPhrase" id="catchPhrase" value="{{catchPhrase}}">
+  <button type="submit">Send</button>
+</form>
