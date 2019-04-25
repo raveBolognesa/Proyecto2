@@ -8,7 +8,6 @@ const isCreator = require("../middlewares/isCreator.js");
 
 const Swag = require('swag');
 
-Swag.registerHelpers(Handlebars);
 /* GET home page */
 router.get('/', (req, res, next) => {
   res.render('index');
