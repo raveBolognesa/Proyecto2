@@ -5,6 +5,7 @@
 <div>
   <h2  class="ml-2">Perfil de {{user.username}}</h2><br>
   <a href="/auth/miperfil/{{user.id}}/edit" class="active m-2 p-2 rounded text-white shadow" >Editar perfil</a><br><br>
+
 </div>
 <h2>Datos de contacto:</h2>
 <h3>{{user.email}}</h3>
@@ -41,7 +42,7 @@
     <button>Delete coment {{this._id}}</button>
   </form>
 
-  <h2>Edit record</h2>
+  <h2>Edita tu comentario</h2>
 
   <form action="/coment/{{_id}}/edit" method="post" enctype="multipart/form-data">
     <label for="name">Name: </label>
