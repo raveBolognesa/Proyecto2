@@ -9,6 +9,8 @@ const isCreator = require("../middlewares/isCreator.js");
 const Swag = require("swag");
 var mongoose = require('mongoose')
 const Product = require("../models/modelProducts");
+require('dotenv').config();
+
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");

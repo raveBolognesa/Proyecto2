@@ -1,3 +1,4 @@
+
 // let places = [];
 document.addEventListener(
   "DOMContentLoaded",
@@ -171,10 +172,10 @@ function startMap() {
 
   var bound = map.getBounds();
   var counter = 0;
-
+  
   axios
-    // .get("https://tupperwire.herokuapp.com/products/mapa")
-    .get("http://localhost:3000/products/mapa")
+  .get("https://tupperwire.herokuapp.com/products/mapa")
+  // .get(`${this.env.URLJSON}`)
     .then(responses => {
       // console.log(responses.data);
       let jam = responses.data.Product;

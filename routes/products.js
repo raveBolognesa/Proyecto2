@@ -8,13 +8,14 @@ const ensureLoggedIn = require("../middlewares/ensureLoggedIn.js");
 const isCreator = require("../middlewares/isCreator.js");
 
 const Swag = require('swag');
+require('dotenv').config();
 
 // dsaa
 // document.getElementById("localizacion").value
 router.get('/', (req, res, next) => {
   Product.find( {}).sort({ lat: 1 })
     .then(Product => {
-      res.render('Products/seeProduct', {Product: Product});
+      res.render('Products/seeProduct', {Product: Product });
     })
     .catch(err => {
       res.render('error', err)
