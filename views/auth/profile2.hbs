@@ -1,19 +1,23 @@
+
+
 <div class="row">
 <div class="card col-5 mr-4 shadow">
   
   <img src="{{user.imgPath}}"   alt="" style=" border-radius:50%; margin: 20px  0 20px 170px;height:200px;width:200px;" >
 <div>
   <h2  class="ml-2">Perfil de {{user.username}}</h2><br>
-  <a href="/auth/miperfil/{{user.id}}/edit" class="active m-2 p-2 rounded text-white shadow" >Editar perfil</a><br><br>
 
 </div>
 <h2>Datos de contacto:</h2>
 <h3>{{user.email}}</h3>
 <h3>{{user.phone}}</h3>
-<h2>{{product.name}}</h2>
+
+  <a href="/auth/miperfil/{{user.id}}/edit" class="active m-2 p-2 rounded text-white shadow" >Editar perfil</a><br><br>
+
+<p>{{user}}</p>
 
 <h2>Comment profile</h2>
-<form action="/coment" method="post" enctype="multipart/form-data" id="{{ this._id }}">
+<form action="/coment/{{user.id}}" method="post" enctype="multipart/form-data" id="{{ this._id }}">
   <input type="hidden" value="{{ this._id }}" name="id">
   <input type="text" name="name">
   <input type="file" name="photo">
@@ -32,8 +36,14 @@
   {{/each}}
 </div>
 </div>
-<div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+
+
   {{user.comments}}
+<div class="card" style="width: 18rem;">
   {{#each user.comments}}
 
   <h3>Soy un comentario {{ this.name }} {{this._id}}</h3>
@@ -44,14 +54,19 @@
 
   <h2>Edita tu comentario</h2>
 
-  <form action="/coment/{{_id}}/edit" method="post" enctype="multipart/form-data">
+  <form action="/coment/{{this._id}}/edit" method="post" enctype="multipart/form-data">
     <label for="name">Name: </label>
-    <input type="text" name="name" id="name" value="{{name}}">
-    <label for="occupation">Occupation: </label>
-    <input type="text" name="occupation" id="occupation" value="{{occupation}}">
-    <label for="catchPhrase">Catch phrase: </label>
-    <input type="text" name="catchPhrase" id="catchPhrase" value="{{catchPhrase}}">
+    <input type="text" name="name" id="name" value="polo">
+  <input type="file" name="photo">
     <button type="submit">Send</button>
   </form>
+</div>
   {{/each}}
+
+
+
+
+
+
+  </div>
 </div>

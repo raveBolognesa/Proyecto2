@@ -89,23 +89,28 @@ router.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
 //   res.render("auth/profile", {user: user, product:product})
 // })
 
-router.get("/miperfil", ensureLoggedIn, (req, res, next) => {
-  usuario = req.user;
-  Coment.find({})
-    .then(allComments => {
-      usuario.comments = allComments;
 
-      Product
-        .find({author: mongoose.Types.ObjectId(usuario.id)})
-        .then(allMyProducts => {
-          usuario.allMyProducts = allMyProducts
-          
-          res.render("auth/profile2", { user: usuario });
-        })
-    })
-    .catch(err => {
-      res.render("./error", err);
-    });
+router.get("/miperfil", ensureLoggedIn,  (req, res, next) => {
+  User.findOne({ _id: req.user }).then(usuario=>{
+
+    Coment.find({referenceId: req.params.userid})
+      .then(allComments => {
+        usuario.comments = allComments;
+  
+        Product
+          .find({author: mongoose.Types.ObjectId(req.user.id)})
+          .then(allMyProducts => {
+            usuario.allMyProducts = allMyProducts
+            
+            res.render("auth/profile2", { user: usuario });
+          })
+      })
+      .catch(err => {
+        res.render("./error", err);
+      });
+
+  })
+  // usuario = req.params.us;
 });
 
 router.get("/miperfil/:userid", ensureLoggedIn,  (req, res, next) => {

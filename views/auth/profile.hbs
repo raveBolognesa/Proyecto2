@@ -31,8 +31,14 @@
   {{/each}}
 </div>
 </div>
-<div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+
+
   {{user.comments}}
+<div class="card" style="width: 18rem;">
   {{#each user.comments}}
 
   <h3>Soy un comentario {{ this.name }} {{this._id}}</h3>
@@ -43,14 +49,19 @@
 
   <h2>Edita tu comentario</h2>
 
-  <form action="/coment/{{_id}}/edit" method="post" enctype="multipart/form-data">
+  <form action="/coment/{{this._id}}/edit" method="post" enctype="multipart/form-data">
     <label for="name">Name: </label>
-    <input type="text" name="name" id="name" value="{{name}}">
-    <label for="occupation">Occupation: </label>
-    <input type="text" name="occupation" id="occupation" value="{{occupation}}">
-    <label for="catchPhrase">Catch phrase: </label>
-    <input type="text" name="catchPhrase" id="catchPhrase" value="{{catchPhrase}}">
+    <input type="text" name="name" id="name" value="polo">
+  <input type="file" name="photo">
     <button type="submit">Send</button>
   </form>
+</div>
   {{/each}}
+
+
+
+
+
+
+  </div>
 </div>
