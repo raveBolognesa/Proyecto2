@@ -1,10 +1,11 @@
 
 <div class="row">
-  <div class="card" style="width: 40rem;">
+  <div class="card shadow-lg" style="width: 40rem;">
   <div class="card-img-top" src="{{this.celebrity.imgPath}}" alt="Card image cap" height="200px" style="background-image: url({{this.celebrity.imgPath}}); object-fit: cover; width: 100%; height: 330px; "></div>
   <div class="card-body">
     <h5 class="card-title">{{this.celebrity.name}}</h5>
-    <h6 class="card-title"><a href="/auth/miperfil/{{this.celebrity.author.id}}">{{this.celebrity.author.username}}</a></h6>
+    <h6 class="card-title">Creado por: <a href="/auth/miperfil/{{this.celebrity.author.id}}">{{this.celebrity.author.username}}</a></h6>
+    <h6>Mandar whatsapp al Creador <a href="https://api.whatsapp.com/send?phone={{this.celebrity.author.phone}}"><i class="fab fa-whatsapp"></i></a></h6>
     <p class="card-text">{{this.celebrity.description}}</p>
     <div class="card-text">Estos son mis ingredientes:
       <ul>
@@ -36,7 +37,7 @@
 {{this.text}}
   {{/each}}
 </div> --}}
-<div class="card col-5 ml-3" id="pep" style="width: 100%;
+<div class="card col-5 ml-3 shadow-lg" id="pep" style="width: 100%;
    height: 840px;
    background-color: grey;">
 <input type="hidden" id="lat" value="{{this.celebrity.lat}}">
@@ -58,3 +59,12 @@ function initMap() {
 }
     </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0HUgfditDr8NvZjsnOmJYIwcP6AWVTqw&callback=initMap"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+
+<style>
+  body{
+    background-color: whitesmoke;
+  }
+</style>
