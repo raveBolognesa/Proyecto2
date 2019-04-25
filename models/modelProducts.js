@@ -18,7 +18,8 @@ const Productschema = new Schema({
   ingredients: Array,
   comments: Array,
   imgPath: String,
-  imgName: String
+  imgName: String,
+  currentUserIsAuthor: Boolean
 }, {
   timestamps: {
     createdAt: 'created_at',

@@ -15,6 +15,12 @@
   <p><a href="/auth/miperfil/{{user.id}}/edit">editar</a></p>
 
 
+  <div id="myRecipes">
+    {{#each user.allMyProducts}}
+      {{this.name}}
+      <img src="{{this.imgPath}}" alt="">
+    {{/each}}
+  </div>
 
   <h2>Comment photo</h2>
   <form action="/coment" method="post" enctype="multipart/form-data" id="{{ this._id }}">

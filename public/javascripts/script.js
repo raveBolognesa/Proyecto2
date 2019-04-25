@@ -25,12 +25,16 @@ function carta(params) {
   }/edit">Edit movie</a><br>${params.description}</p>
     <p class="card-text"><small class="text-muted">${
       params.updated_at
-    }</small></p>
+    }</small></p>`
 
-  <form action="/products/${params._id}/delete" method="post">
-    <button>Delete movie</button>
-  </form> 
-  </div>
+    if (params.currentUserIsAuthor) {
+      texto += `<form action="/products/${params._id}/delete" method="post">
+        <button>Delete movie</button>
+      </form> `
+    }
+
+  
+    texto += `</div>
   <img class="card-img-bottom" src="${params.imgPath}" alt="Card image cap">
 </div>`;
   return texto;
@@ -169,7 +173,8 @@ function startMap() {
   var counter = 0;
 
   axios
-    .get("https://tupperwire.herokuapp.com/products/mapa")
+    // .get("https://tupperwire.herokuapp.com/products/mapa")
+    .get("http://localhost:3000/products/mapa")
     .then(responses => {
       // console.log(responses.data);
       let jam = responses.data.Product;

@@ -34,8 +34,24 @@ router.get('/search/:param', (req, res, next) => {
 
 router.get('/mapa', (req, res, next) => {
   Product.find({})
-    .then(Product => {
-      res.json({Product: Product});
+    .then(AllProducts => {
+      // if (req.user)
+      AllProducts = AllProducts.map(product => {
+        console.log(req.user._id)
+        console.log(product.author)
+        console.log(req.user._id === product.author)
+        if (req.user._id.toString() === product.author.toString()) {
+          product.currentUserIsAuthor = true
+        } else {
+          product.currentUserIsAuthor = false
+        }
+
+        return product
+      })
+
+      // console.log(AllProducts)
+
+      res.json({Product: AllProducts});
     })
     .catch(err => {
       res.render('error', err)
@@ -65,7 +81,7 @@ router.get('/mapa', (req, res, next) => {
   console.log(vegan,veget, typeFood)
   const imgName = req.file.originalname;
   const author = req.user.id;
-  const main = new Product({name, author,kcal, ingredients,vegan,veget, typeFood, description, photo, imgPath, imgName,lat , lng, Pos})
+  const main = new Product({name, author,kcal, ingredients,vegan,veget, typeFood, description, imgPath, imgName,lat , lng, Pos})
   main.save()
   .then(
     res.redirect('/products')
