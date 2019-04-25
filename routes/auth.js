@@ -72,14 +72,25 @@ router.post("/signup", uploadCloud.single('photo'), (req, res, next) => {
   });
 });
 
+//Buscar productos de un usuario
+// const Product = require("../models/modelProducts");
+// router.get('/miperfil', ensureLoggedIn ,(req,res, next)=>{
+//   user =req.user
+//   id=req.params.id
+//   Product.find({author: res.user.id})
+//   res.render("auth/profile", {user: user, product:product})
+// })
+
 router.get('/miperfil', ensureLoggedIn ,(req,res, next)=>{
   user =req.user
+ 
   res.render("auth/profile", {user: user})
 
 
 })
 
 router.get('/miperfil/:id/edit', ensureLoggedIn,(req, res, next) => { 
+
   User.findOne({_id: req.params.id})
     .then(user => {
       
@@ -93,11 +104,21 @@ router.get('/miperfil/:id/edit', ensureLoggedIn,(req, res, next) => {
 // editado
 router.post('/miperfil/:id/edit', uploadCloud.single('photo'), (req, res, next) => { 
   const { username, email, password, phone, photo, rating} = req.body;
-  // const imgPath = req.file.url;
-  // const imgName = req.file.originalname;
+  var usuario = req.user
+  console.log('mi test ',imgPath)
+  if(req.file === undefined){
+    var imgPath = usuario.imgPath;
+    var imgName = usuario.imgName;
+
+  }else{
+    var imgPath = req.file.url;
+    var imgName = req.file.originalname;
+
+  }
+
  
 
-      User.findOneAndUpdate({_id: req.params.id}, {username, email, password, phone, photo, rating})
+      User.findOneAndUpdate({_id: req.params.id}, {username, email, phone, imgPath, imgName})
         .then(celebrity => {
           res.redirect('/auth/miperfil');
         })
