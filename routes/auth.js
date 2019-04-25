@@ -111,7 +111,7 @@ router.get("/miperfil", ensureLoggedIn, (req, res, next) => {
 router.get("/miperfil/:userid", ensureLoggedIn,  (req, res, next) => {
   User.findOne({ _id: req.params.userid }).then(usuario=>{
 
-    Coment.find({creatorId: mongoose.Types.ObjectId(req.params.userid)})
+    Coment.find({referenceId: req.params.userid})
       .then(allComments => {
         usuario.comments = allComments;
   

@@ -5,6 +5,7 @@ const ComentSchema = Schema({
   name: String,
   path: String,
   originalName: String,
+  referenceId: String,
   creatorId: String,
   postId: String
 });

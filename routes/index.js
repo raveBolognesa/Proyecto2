@@ -1,28 +1,23 @@
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 const User = require("../models/User");
 const Coment = require("../models/coment");
-const uploadCloud = require('../config/cloudinary.js');
+const uploadCloud = require("../config/cloudinary.js");
 const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 const isCreator = require("../middlewares/isCreator.js");
 
-const Swag = require('swag');
+const Swag = require("swag");
 
 /* GET home page */
-router.get('/', (req, res, next) => {
-  res.render('index', {user: req.user});
+router.get("/", (req, res, next) => {
+  res.render("index", { user: req.user });
 });
 
-
-
 ////
-
-
-
 router.post(
-  "/coment",
+  "/coment/:id",
   ensureLoggedIn("/login"),
-  uploadCloud.single('photo'),
+  uploadCloud.single("photo"),
   (req, res) => {
     let id = req.body.id;
 
@@ -30,6 +25,28 @@ router.post(
       name: req.body.name,
       path: req.file.url,
       originalName: req.file.originalname,
+      referenceId: req.params.id,
+      creatorId: req.user._id,
+      postId: id
+    });
+    pic.save(err => {
+      res.redirect("/");
+    });
+  }
+);
+
+router.post(
+  "/coment",
+  ensureLoggedIn("/login"),
+  uploadCloud.single("photo"),
+  (req, res) => {
+    let id = req.body.id;
+
+    const pic = new Coment({
+      name: req.body.name,
+      path: req.file.url,
+      originalName: req.file.originalname,
+      referenceId: String,
       creatorId: req.user._id,
       postId: id
     });
@@ -53,31 +70,27 @@ router.post(
   }
 );
 
-
-
-router.post('/coment/:id/edit',
-ensureLoggedIn("/login"), (req, res, next) => {
-  Coment.findOneAndUpdate({_id: req.params.id} , req.body)
+router.post("/coment/:id/edit", ensureLoggedIn("/login"), (req, res, next) => {
+  Coment.findOneAndUpdate({ _id: req.params.id }, req.body)
     .then(result => {
-      console.log('peliacu actualizada:', result);
-      res.redirect('/');
+      console.log("peliacu actualizada:", result);
+      res.redirect("/");
     })
     .catch(err => {
-      res.render('./error', err)
-    })
-})
+      res.render("./error", err);
+    });
+});
 
-router.post('/photo/:id/edit',
-ensureLoggedIn("/login"), (req, res, next) => {
-  Picture.findOneAndUpdate({_id: req.params.id} , req.body)
+router.post("/photo/:id/edit", ensureLoggedIn("/login"), (req, res, next) => {
+  Picture.findOneAndUpdate({ _id: req.params.id }, req.body)
     .then(result => {
-      console.log('peliacu actualizada:', result);
-      res.redirect('/');
+      console.log("peliacu actualizada:", result);
+      res.redirect("/");
     })
     .catch(err => {
-      res.render('./error', err)
-    })
-})
+      res.render("./error", err);
+    });
+});
 
 router.post(
   "/coment/:id/delete",
@@ -93,10 +106,6 @@ router.post(
   }
 );
 
-
-
 ////
-
-
 
 module.exports = router;

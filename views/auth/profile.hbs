@@ -9,10 +9,10 @@
 <h2>Datos de contacto:</h2>
 <h3>{{user.email}}</h3>
 <h3>{{user.phone}}</h3>
-<h2>{{product.name}}</h2>
+<p>{{user}}</p>
 
 <h2>Comment profile</h2>
-<form action="/coment" method="post" enctype="multipart/form-data" id="{{ this._id }}">
+<form action="/coment/{{user.id}}" method="post" enctype="multipart/form-data" id="{{ this._id }}">
   <input type="hidden" value="{{ this._id }}" name="id">
   <input type="text" name="name">
   <input type="file" name="photo">
