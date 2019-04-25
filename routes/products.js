@@ -63,7 +63,6 @@ router.get('/mapa', (req, res, next) => {
   if(veget === undefined){ veget = false}else{veget=true}
   typeFood = typeFood[1]
   console.log(vegan,veget, typeFood)
-  const imgPath = req.file.url;
   const imgName = req.file.originalname;
   const author = req.user.id;
   const main = new Product({name, author,kcal, ingredients,vegan,veget, typeFood, description, photo, imgPath, imgName,lat , lng, Pos})
