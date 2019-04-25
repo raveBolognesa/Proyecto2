@@ -35,9 +35,9 @@ router.get('/search/:param', (req, res, next) => {
 
 router.get('/mapa', (req, res, next) => {
   Product.find({})
-    .then(Product => {
+    .then(AllProducts => {
       // if (req.user)
-      Product = Product.map(product => {
+      AllProducts = AllProducts.map(product => {
         console.log(req.user._id)
         console.log(product.author)
         console.log(req.user._id === product.author)
@@ -50,9 +50,9 @@ router.get('/mapa', (req, res, next) => {
         return product
       })
 
-      // console.log(Product)
+      // console.log(AllProducts)
 
-      res.json({Product: Product});
+      res.json({Product: AllProducts});
     })
     .catch(err => {
       res.render('error', err)
