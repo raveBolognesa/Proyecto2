@@ -100,7 +100,7 @@ router.get("/miperfil", ensureLoggedIn, (req, res, next) => {
         .then(allMyProducts => {
           usuario.allMyProducts = allMyProducts
           
-          res.render("auth/profile", { user: usuario });
+          res.render("auth/profile2", { user: usuario });
         })
     })
     .catch(err => {
@@ -131,7 +131,7 @@ router.get("/miperfil/:userid", ensureLoggedIn,  (req, res, next) => {
   // usuario = req.params.us;
 });
 
-router.get("/miperfil/:id/edit",isRafa,  ensureLoggedIn, (req, res, next) => {
+router.get("/miperfil/:id/edit",  ensureLoggedIn, (req, res, next) => {
   User.findOne({ _id: req.params.id })
     .then(user => {
       res.render("auth/editProfile", { user: user });
