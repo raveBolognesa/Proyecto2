@@ -18,7 +18,7 @@ function carta(params) {
   var texto = `<div class="card mt-3 rounded shadow">
   <div class="card-body">
     <h5 class="card-title">${params.name}</h5>
-    <p class="card-text"><a href="/products/${
+    <p class="card-text"><a  class=" btn active p-1 text-white m-2 rounded" href="/products/${
       params._id
     }">Show details</a><br>${params.description}</p>
     <p class="card-text"><small class="text-muted">${
@@ -27,8 +27,8 @@ function carta(params) {
 
   if (params.currentUserIsAuthor) {
     texto += `<form action="/products/${params._id}/delete" method="post">
-        <button>Delete tupper</button>
-      </form> <a href="/products/${params._id}/edit">Edit tupper</a>`;
+        <button   class=" btn active p-1 text-white m-2 rounded" >Delete tupper</button>
+      </form> <a    class=" btn active p-1 text-white m-2 rounded"  href="/products/${params._id}/edit">Edit tupper</a>`;
   }
 
   texto += `</div>
@@ -183,8 +183,8 @@ function startMap() {
   var counter = 0;
 
   axios
-    .get("https://tupperwire.herokuapp.com/products/mapa")
-    // .get("http://localhost:3000/products/mapa")
+    // .get("https://tupperwire.herokuapp.com/products/mapa")
+    .get("http://localhost:3000/products/mapa")
     .then(responses => {
       // console.log(responses.data);
       let jam = responses.data.Product;

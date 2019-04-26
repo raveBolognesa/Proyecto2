@@ -38,12 +38,12 @@
         <div class="card mt-3">
           <div class="card-body">
             <h5 class="card-title">{{name}}</h5>
-            <p class="card-text"><a href="/products/{{_id}}">Show details</a><a href="/products/{{_id}}/edit">Edit
+            <p class="card-text"><a    class=" btn active p-1 text-white m-2 rounded"  href="/products/{{_id}}">Show details</a><a   class=" btn active p-1 text-white m-2 rounded"  href="/products/{{_id}}/edit">Edit
                 tupper</a><br>{{description}}</p>
             <p class="card-text"><small class="text-muted">{{updated_at}}</small></p>
 
             <form action="/products/{{_id}}/delete" method="post">
-              <button>Delete tupper</button>
+              <button   class=" btn active p-1 text-white m-2 rounded" >Delete tupper</button>
             </form>
           </div>
           <img class="card-img-bottom" src="{{this.imgPath}}" alt="Card image cap">
