@@ -1,4 +1,4 @@
-<div class="row">
+{{!-- <div class="row">
 <div class="card col-5 mr-4 shadow">
   
   <img src="{{user.imgPath}}"   alt="" style=" border-radius:50%; margin: 20px  0 20px 170px;height:200px;width:200px;" >
@@ -64,4 +64,148 @@
 
 
   </div>
+</div> --}}
+
+{{!-- 
+////// --}}
+
+<div class="row">
+  <div class="card col-5 mr-4 shadow text-center">
+
+    <img src="{{user.imgPath}}" alt="" style=" border-radius:50%; margin: 20px  0 20px 170px;height:200px;width:200px;">
+    <div>
+      <h2 class="ml-2 font-weight-bold">Perfil de {{user.username}}</h2><br>
+
+    </div>
+    <h2 class="font-weight-light">Datos de contacto:</h2>
+    <p class="font-weight-bold "><a HREF="mailto:{{user.email}}"> <i class="fas fa-envelope"></i> Mail:
+        {{user.email}}</a></p>
+    <p class="font-weight-bold "><a href="https://wa.me/{{user.phone}}"><i class="fab fa-whatsapp"></i> Phone:
+        {{user.phone}}</a></p>
+    <p>Numero de Tuppers Compartidos {{length user.allMyProducts}}</p>
+    <p>Numero de Comentarios recibidos {{length user.comments}}</p>
+
+    <p class="text-info font-weight-light">Usuario desde: {{formatDate user.created_at "%F"}}</p>
+    {{!-- <p>Actualizado en: {{user.updated_at}}</p> --}}
+    {{!-- <a href="/auth/miperfil/{{user.id}}/edit" class="active m-2 p-2 rounded text-white shadow">Editar perfil</a><br><br> --}}
+
+    {{!-- <p>{{user}}</p> --}}
+
+    {{!-- <h2>Comment profile</h2>
+<form action="/coment/{{user.id}}" method="post" enctype="multipart/form-data" id="{{ this._id }}">
+  <input type="hidden" value="{{ this._id }}" name="id">
+  <input type="text" name="name">
+  <input type="file" name="photo">
+  <input type="submit" value="Save">
+</form> --}}
+  </div>
+
+
+
+  <div class=" col-6 ml-4" style="overflow: scroll; height:600px">
+    {{#each user.allMyProducts}}
+    {{!-- <div class="card  shadow" >
+  {{this}}
+  <img src="{{this.imgPath}}" alt="">
+  <div>
+
+    <div class="card">
+    <img class="card-img-top" src="{{this.imgPath}}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Creado en {{this.created_at}}</small>
+    </div>
+  </div> --}}
+    <div class="card shadow mb-3">
+      <div class="row no-gutters">
+        <div class="col-auto">
+          <img src="{{this.imgPath}}" class="img-fluid" width="330px" height="330px" alt="">
+        </div>
+        <div class="col">
+          <div class="card-block px-2">
+            <h4 class="card-title pr-1 mt-2">{{this.name}}</h4>
+            <p class="card-text pr-1">{{this.description}}</p>
+            {{!-- <form action="/products/{{this.id}}/delete" method="post">
+              <button class="btn text-white active mt-2">Delete movie</button>
+            </form> <a href="/products/{{this.id}}/edit" class="btn text-white active mt-2">Edit product</a> --}}
+            <br><a href="/products/{{this.id}}" class="btn text-white active mt-2">See product</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer w-100 text-muted">
+        Creado en {{this.created_at}}
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+</div>
+
+<div class="row mt-3 ">
+  <div class="card col-3 mr-2 pt-2 shadow" style="height: 400px; ">
+    <h2>Comment profile</h2>
+    <form action="/coment/{{user.id}}" method="post" enctype="multipart/form-data" id="{{ this._id }}">
+      <input type="hidden" value="{{ this._id }}" name="id">
+      <textarea class="form-control mb-3 mt-2" type="text" name="name" rows="8"></textarea>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile01" name="photo">
+    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+  </div>
+      <input class="btn active text-white mt-3" type="submit" value="Save">
+    </form>
+  </div>
+
+  {{#each user.comments}}
+  <div class="card mr-3" style="width: 18rem;height: 400px">
+    <img class="card-img-top" src="{{ this.path }}" alt="Card image cap">
+    <div class="card-body">
+      <p class="card-text">{{this.name}}</p>
+    </div>
+    {{#is user._id this.referenceId}}
+    <form action="/coment/{{this._id}}/edit" method="post" enctype="multipart/form-data">
+      <label for="name">Name: </label>
+      <input type="text" name="name" id="name" value="polo">
+      <input type="file" name="photo">
+      <button type="submit">Send</button>
+    </form>
+    {{/is}}
+    <div >
+      <small class="text-muted "><form action="/coment/{{this._id}}/delete" method="post">
+      <button class="card-footer" style="width: 18rem;">Delete coment </button>
+    </form></small>
+    </div>
+  </div>
+
+
+
+
+
+  {{!-- /////
+  <div class="card mr-2 shadow" style="width: 18rem;">
+
+    <h3>Soy un comentario {{ this.name }} {{this._id}}</h3>
+    <img src="{{ this.path }}" alt="{{ this.originalName }}" />
+    <form action="/coment/{{this._id}}/delete" method="post">
+      <button>Delete coment {{this._id}}</button>
+    </form>
+
+    <h2>Edita tu comentario</h2>
+
+    <form action="/coment/{{this._id}}/edit" method="post" enctype="multipart/form-data">
+      <label for="name">Name: </label>
+      <input type="text" name="name" id="name" value="polo">
+      <input type="file" name="photo">
+      <button type="submit">Send</button>
+    </form>
+  </div> --}}
+  {{/each}}
+
+
+
+
+
+
 </div>

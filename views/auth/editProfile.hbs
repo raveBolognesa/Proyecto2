@@ -1,24 +1,61 @@
-<h2>Edita tu perfil</h2>
+
+
+
+ <div class="row">
+   <div class="card col-5 mr-4 shadow text-center">
+
+    <img src="{{user.imgPath}}" alt="" style=" border-radius:50%; margin: 20px  0 20px 170px;height:200px;width:200px;">
+    <div>
+      <h2 class="ml-2 font-weight-bold">Perfil de {{user.username}}</h2><br>
+
+    </div>
+    <h2 class="font-weight-light">Datos de contacto:</h2>
+    <p class="font-weight-bold "><a HREF="mailto:{{user.email}}"> <i class="fas fa-envelope"></i> Mail:
+        {{user.email}}</a></p>
+    <p class="font-weight-bold "><a href="https://wa.me/{{user.phone}}"><i class="fab fa-whatsapp"></i> Phone:
+        {{user.phone}}</a></p>
+    <p>Numero de Tuppers Compartidos {{length user.allMyProducts}}</p>
+    <p>Numero de Comentarios recibidos {{length user.comments}}</p>
+
+    <p class="text-info font-weight-light">Usuario desde: {{formatDate user.created_at "%F"}}</p>
+    {{!-- <p>Actualizado en: {{user.updated_at}}</p> --}}
+    {{!-- <a href="/auth/miperfil/{{user.id}}/edit" class="active m-2 p-2 rounded text-white shadow">Editar perfil</a><br><br> --}}
+
+    {{!-- <p>{{user}}</p> --}}
+
+    {{!-- <h2>Comment profile</h2>
+<form action="/coment/{{user.id}}" method="post" enctype="multipart/form-data" id="{{ this._id }}">
+  <input type="hidden" value="{{ this._id }}" name="id">
+  <input type="text" name="name">
+  <input type="file" name="photo">
+  <input type="submit" value="Save">
+</form> --}}
+  </div>
+
+
+   <div class="card col-6 ml-4 shadow text-center">
 
 <form action="/auth/miperfil/{{user._id}}/edit" method="POST" id="form-container" enctype="multipart/form-data">
-  <label for="username">Username</label>
-  <input id="username" type="text" name="username" value="{{user.username}}">
+  <img src="{{user.imgPath}}" alt="" style=" border-radius:50%; margin: 20px  0 20px 0px;height:200px;width:200px;">
+    
+  <div class="custom-file mt-2 mb-2">
+    <input type="file" class="custom-file-input" id="inputGroupFile01" name="photo" value="{{user.photo}}">
+    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+  </div>
 
-  <br><br>
+
+  <label for="username">Username</label>
+  <input class="col-12 mt-2 mb-2" id="username" type="text" name="username" value="{{user.username}}">
+
 
   <label for="email">Introduce tu email</label>
-  <input id="email" type="text" name="email" value="{{user.email}}">
+  <input class="col-12 mt-2 mb-2"  id="email" type="text" name="email" value="{{user.email}}">
 
-  <br><br>
 
   <label for="phone">Introduce tu teléfono</label>
-  <input id="phone" type="phone" name="phone" value="{{user.phone}}">
+  <input class="col-10 mt-2 mb-2"  id="phone" type="phone" name="phone" value="{{user.phone}}">
   <br><br>
-  <label for="photo">Sube to imagen de perfil:   </label>
-
-  <input type="file" name="photo" value="{{user.photo}}">
-  <br><br>
- <button type="submit">Actualizar perfil</button>
+ <button class="active p-2 text-white col-12 rounded" type="submit">Actualizar perfil</button>
 
 
   
@@ -29,8 +66,10 @@
 
   <br><br>
 
-
-  <p>{{user}}</p>
+{{!-- 
+  <p>{{user}}</p> --}}
 
 </form>
 
+</div>
+</div>

@@ -93,7 +93,7 @@ router.post("/signup", uploadCloud.single("photo"), (req, res, next) => {
 router.get("/miperfil", ensureLoggedIn,  (req, res, next) => {
   User.findOne({ _id: req.user }).then(usuario=>{
 
-    Coment.find({referenceId: req.params.userid})
+    Coment.find({referenceId: usuario._id})
       .then(allComments => {
         usuario.comments = allComments;
   

@@ -38,7 +38,8 @@ function test(main,second) {
                         
 
             let listaItem = document.createElement("li")
-            listaItem.innerHTML = `label ${x.label} brand: ${x.brand} <br> <p>Kcals: ${x.nutrients.ENERC_KCAL}</p> <button onclick="test('${x.label}',${x.nutrients.ENERC_KCAL})">mandar datos</button>`
+            listaItem.innerHTML = `<p>label ${x.label} brand: ${x.brand} Kcals: ${x.nutrients.ENERC_KCAL}</p>   <button class="col-12 active  text-white rounded p-2" onclick="test('${x.label}',${x.nutrients.ENERC_KCAL})">Save ingredient</button> `
+            listaItem.setAttribute("class","list-group-item") 
             document.querySelector("#ingredienteslista").appendChild(listaItem)
             
 
