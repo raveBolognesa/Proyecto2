@@ -27,8 +27,8 @@ function carta(params) {
 
   if (params.currentUserIsAuthor) {
     texto += `<form action="/products/${params._id}/delete" method="post">
-        <button>Delete movie</button>
-      </form> <a href="/products/${params._id}/edit">Edit movie</a>`;
+        <button>Delete tupper</button>
+      </form> <a href="/products/${params._id}/edit">Edit tupper</a>`;
   }
 
   texto += `</div>
@@ -89,6 +89,15 @@ function startMap() {
   const map = new google.maps.Map(document.getElementById("mapBig"), {
     zoom: 15,
     center: Madrid,
+    disableDefaultUI: true,
+    zoomControl: true,
+    mapTypeControl: true,
+    mapTypeControlOptions: {
+      position: google.maps.ControlPosition.BOTTOM_CENTER
+  },
+    mapTypeControlOptions: {
+      position: google.maps.ControlPosition.BOTTOM_CENTER
+  },
     styles: [
       {
         featureType: "landscape.natural",

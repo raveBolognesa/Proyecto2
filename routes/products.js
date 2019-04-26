@@ -12,7 +12,7 @@ require("dotenv").config();
 
 // dsaa
 // document.getElementById("localizacion").value
-router.get("/", (req, res, next) => {
+router.get("/", ensureLoggedIn,  (req, res, next) => {
   Product.find({})
     .sort({ lat: 1 })
     .then(Product => {
